@@ -1,0 +1,70 @@
+body {
+  background-color: grey;
+}
+
+.gameboard {
+  /*width: 36rem;*/
+  /*height: 34rem;*/
+  position: absolute;
+  /*aspect-ratio: 1 / 1;*/
+  background-color: rosybrown;
+  border-color: sandybrown;
+  border-width: 2rem;
+  border-style: double;
+  margin: 2rem;
+}
+
+.tile {
+  top: 1rem;
+  left: 1rem;
+  width: 8rem;
+  height: 8rem;
+  /*aspect-ratio: 1 / 1;*/
+  background-color: darkseagreen;
+  border-color: green;
+  border-width: thick;
+  font-size: larger;
+  border-radius: 0.5rem;
+  position: absolute;
+}
+.tile:hover {
+  border-color: darkgreen;
+  background-color: darkgreen;
+}
+
+form {
+  border-radius: .5rem;
+  background-color: #f2f2f2;
+  padding: 1rem;
+  width: 15rem;
+}
+form label {
+  text-align: right;
+  display: inline-block;
+  width: 40%;
+}
+form input,select {
+  width: 40%;
+  margin: .2rem 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: .5rem;
+  box-sizing: border-box;
+}
+form input:hover,select:hover {
+  border: 1px solid black;
+}
+
+form input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 1.1rem 1.3rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+form input[type=submit]:hover {
+  background-color: #45a049;
+  border: 1px solid black;
+}
