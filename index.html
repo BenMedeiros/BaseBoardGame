@@ -28,15 +28,15 @@
 
 <body>
 
-<!-- Add your site or application content here -->
-<p>Hello world! This is HTML5 Boilerplate.</p>
 <script src="js/vendor/modernizr-3.11.2.min.js"></script>
 <script src="js/plugins.js"></script>
 <script src="js/main.js"></script>
+<script src="https://kit.fontawesome.com/974551802e.js" crossorigin="anonymous"></script>
 
 
-<form id="gameConfig">
-
+<form id="gameConfig" class="collapsible">
+  <button class="collapsibleController" collapseTargetId="gameConfig">Settings</button>
+  <br/>
   <label for="playerName">Player Name</label>
   <input type="text" id="playerName" name="playerName" placeholder="your name">
   <br/>
@@ -45,16 +45,16 @@
   <br/>
 
   <label for="tileHeight">Tile Height</label>
-  <input type="number" id="tileHeight" name="tileHeight" value="8">
+  <input type="number" id="tileHeight" name="tileHeight">
   <br/>
   <label for="tileWidth">Tile Width:</label>
-  <input type="number" id="tileWidth" name="tileWidth" value="8">
+  <input type="number" id="tileWidth" name="tileWidth">
   <br/>
   <label for="numRows">Rows</label>
-  <input type="number" id="numRows" name="numRows" value="4">
+  <input type="number" id="numRows" name="numRows">
   <br/>
   <label for="numCols">Cols</label>
-  <input type="number" id="numCols" name="numCols" value="4">
+  <input type="number" id="numCols" name="numCols">
   <br/>
 
   <label for="country">Country</label>
@@ -64,30 +64,42 @@
     <option value="usa">USA</option>
   </select>
   <br/>
-
-
   <br/>
   <input type="submit" value="Update Board">
+  <br/>
+  <div style="text-align: center; padding: 1rem; word-spacing: 1rem">
+    <i id="leftButton"
+       onclick="togglePlay(-1)"
+       class="fas fa-angle-double-left fa-2xl"
+    ></i>
+    <i id="pauseButton"
+       onclick="togglePlay(0)"
+       class="fa-solid fa-pause fa-2xl"
+    ></i>
+    <i id="rightButton"
+       onclick="togglePlay(1)"
+       class="fas fa-angle-double-right fa-2xl"
+    ></i>
+  </div>
 </form>
 
-<div id="gameboard" class="gameboard"/>
 
+<div id="gameboard" class="gameboard"></div>
 <script src="js/gameboard/buildBoard.js"></script>
 
-
-<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-<script>
-  window.ga = function () {
-    ga.q.push(arguments)
-  };
-  ga.q = [];
-  ga.l = +new Date;
-  ga('create', 'UA-XXXXX-Y', 'auto');
-  ga('set', 'anonymizeIp', true);
-  ga('set', 'transport', 'beacon');
-  ga('send', 'pageview')
-</script>
-<script src="https://www.google-analytics.com/analytics.js" async></script>
+<!--&lt;!&ndash; Google Analytics: change UA-XXXXX-Y to be your site's ID. &ndash;&gt;-->
+<!--<script>-->
+<!--  window.ga = function () {-->
+<!--    ga.q.push(arguments)-->
+<!--  };-->
+<!--  ga.q = [];-->
+<!--  ga.l = +new Date;-->
+<!--  ga('create', 'UA-XXXXX-Y', 'auto');-->
+<!--  ga('set', 'anonymizeIp', true);-->
+<!--  ga('set', 'transport', 'beacon');-->
+<!--  ga('send', 'pageview')-->
+<!--</script>-->
+<!--<script src="https://www.google-analytics.com/analytics.js" async></script>-->
 </body>
 
 </html>

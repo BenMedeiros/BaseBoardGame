@@ -5,13 +5,18 @@ body {
 .gameboard {
   /*width: 36rem;*/
   /*height: 34rem;*/
-  position: absolute;
   /*aspect-ratio: 1 / 1;*/
   background-color: rosybrown;
   border-color: sandybrown;
   border-width: 2rem;
   border-style: double;
-  margin: 2rem;
+  /*centers when position:absolute*/
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
 }
 
 .tile {
@@ -32,11 +37,26 @@ body {
   background-color: darkgreen;
 }
 
+.insert {
+  background-color: indianred;
+  position: absolute;
+  font-size: small;
+  border-radius: .2rem;
+}
+
 form {
+  overflow: hidden;
   border-radius: .5rem;
+  border: .2rem black dashed;
   background-color: #f2f2f2;
   padding: 1rem;
   width: 15rem;
+  margin: 1rem 1rem auto;
+  display: block;
+  position: absolute;
+  z-index: 1;
+  /*left: 0;*/
+  /*right: 0;*/
 }
 form label {
   text-align: right;
@@ -68,3 +88,38 @@ form input[type=submit]:hover {
   background-color: #45a049;
   border: 1px solid black;
 }
+
+
+.collapsible {
+  /*overflow: hidden;*/
+  max-height: 25rem;
+  max-width: 25rem;
+  transition: max-height 1s ease-in, max-width .5s ease-out;
+}
+.collapsed {
+  /*overflow: hidden;*/
+  display: block;
+  max-height: 1rem;
+  max-width: 8rem;
+  transition: max-height .5s, max-width 1.5s;
+}
+.collapsibleController {
+  border-radius: 1rem;
+  border: 0;
+}
+.collapsibleController:after {
+  content: '\26ED\00a0';
+  color: black;
+  font-weight: bold;
+  font-size: large;
+  float: left;
+}
+.collapsibleController.collapsed:after {
+  content: '\26EC\00a0';
+  color: black;
+  font-weight: bold;
+  font-size: large;
+  float: left;
+}
+
+
