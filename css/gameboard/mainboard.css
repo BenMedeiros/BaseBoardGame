@@ -58,6 +58,10 @@ form {
   /*left: 0;*/
   /*right: 0;*/
 }
+form header{
+  font-size: large;
+  padding-bottom: .8rem;
+}
 form label {
   text-align: right;
   display: inline-block;
@@ -99,8 +103,8 @@ form input[type=submit]:hover {
 .collapsed {
   /*overflow: hidden;*/
   display: block;
-  max-height: 1rem;
-  max-width: 8rem;
+  max-height: 1.1rem;
+  max-width: 5rem;
   transition: max-height .5s, max-width 1.5s;
 }
 .collapsibleController {

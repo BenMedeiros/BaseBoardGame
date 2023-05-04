@@ -34,14 +34,16 @@
 <script src="https://kit.fontawesome.com/974551802e.js" crossorigin="anonymous"></script>
 
 
-<form id="gameConfig" class="collapsible">
-  <button class="collapsibleController" collapseTargetId="gameConfig">Settings</button>
-  <br/>
+<form id="gameConfig" class="collapsible" onsubmit="return false">
+  <header>
+    <i class="fa-solid fa-bars"></i>
+    Settings
+  </header>
   <label for="playerName">Player Name</label>
   <input type="text" id="playerName" name="playerName" placeholder="your name">
   <br/>
-  <label for="isActive">Is Active</label>
-  <input type="checkbox" id="isActive" name="isActive" checked>
+  <label for="autoResize">Auto Resize</label>
+  <input type="checkbox" id="autoResize" name="autoResize" checked>
   <br/>
 
   <label for="tileHeight">Tile Height</label>
@@ -57,6 +59,9 @@
   <input type="number" id="numCols" name="numCols">
   <br/>
 
+
+
+
   <label for="country">Country</label>
   <select id="country" name="country">
     <option value="australia">Australia</option>
@@ -65,7 +70,7 @@
   </select>
   <br/>
   <br/>
-  <input type="submit" value="Update Board">
+  <input type="submit" value="Update Board" onclick="updateBoard(this)">
   <br/>
   <div style="text-align: center; padding: 1rem; word-spacing: 1rem">
     <i id="leftButton"
@@ -85,6 +90,9 @@
 
 
 <div id="gameboard" class="gameboard"></div>
+<script src="js/gameboard/gameActions.js"></script>
+<script src="js/gameboard/gameData.js"></script>
+<script src="js/gameboard/htmlElementCreation.js"></script>
 <script src="js/gameboard/buildBoard.js"></script>
 
 <!--&lt;!&ndash; Google Analytics: change UA-XXXXX-Y to be your site's ID. &ndash;&gt;-->
