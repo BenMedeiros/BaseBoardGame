@@ -16,7 +16,7 @@ const gameConfig = {
 Object.defineProperties(gameConfig, {
   numTiles: {
     get() {
-      return this.numRows * this.numCols
+      return (this.numRows * this.numCols) + 1
     }
   },
   boardWidth: {
@@ -33,8 +33,27 @@ Object.defineProperties(gameConfig, {
 
 const gameState = {
   lastInsertionPoint: null,
-  settingsExpanded: true
+  settingsExpanded: true,
+  activeTileId: 0,
+  activeTileIdHistory: []
 }
+
+Object.defineProperties(gameState, {
+  activeTile: {
+    get() {
+      return tiles[this.activeTileId];
+    },
+    set(tile) {
+      this.activeTileIdHistory.push(this.activeTileId);
+      this.activeTileId = tile.id;
+    }
+  },
+  lastActiveTile: {
+    get() {
+      return tiles[this.activeTileIdHistory[this.activeTileIdHistory.length-1]];
+    }
+  }
+});
 
 
 function loadConfigFromStorage() {
@@ -63,10 +82,16 @@ function populateUiSettingsFromConfig() {
   }
 }
 
-function readUiSettingsIntoConfig(){
+function readUiSettingsIntoConfig() {
   const formElement = document.getElementById('gameConfig');
   const formData = new FormData(formElement);
-  for (const key of Object.keys(gameConfig)) {
-    gameConfig[key] = formData.get(key);
+  for (const [key, value] of Object.entries(gameConfig)) {
+    if (typeof (value) === 'number') {
+      gameConfig[key] = Number(formData.get(key));
+    } else if (typeof (value) === 'boolean') {
+      gameConfig[key] = Boolean(formData.get(key));
+    } else {
+      gameConfig[key] = formData.get(key);
+    }
   }
 }

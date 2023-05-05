@@ -36,6 +36,11 @@ body {
   border-color: darkgreen;
   background-color: darkgreen;
 }
+.tile.active-tile {
+  border-color: darkblue;
+  background-color: blue;
+}
+
 
 .insert {
   background-color: indianred;
