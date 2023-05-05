@@ -1,0 +1,100 @@
+form {
+  border-radius: .5rem;
+  border: .2rem black dashed;
+  background-color: #f2f2f2;
+  padding: 1rem;
+  margin: 1rem 1rem auto;
+  display: block;
+  position: absolute;
+  z-index: 1;
+
+  overflow: auto;
+  resize: both;
+
+
+  /*left: 0;*/
+  /*right: 0;*/
+}
+
+form header {
+  font-size: large;
+  padding-bottom: .8rem;
+  user-select: none;
+}
+
+form label {
+  text-align: right;
+  display: inline-block;
+  width: 40%;
+  user-select: none;
+}
+
+form input, select {
+  width: 40%;
+  margin: .2rem 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: .5rem;
+  box-sizing: border-box;
+}
+
+form input:hover, select:hover {
+  border: 1px solid black;
+}
+
+form input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 1.1rem 1.3rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form input[type=submit]:hover {
+  background-color: #45a049;
+  border: 1px solid black;
+}
+
+
+.collapsible {
+  overflow: hidden;
+}
+
+.collapsed {
+  display: block;
+  height: 1.1rem;
+  width: 5rem;
+  overflow: hidden;
+  resize: none;
+  min-height: 1.1rem;
+  min-width: 5rem;
+  max-height: 1.1rem;
+  max-width: 5rem;
+}
+
+.expanded {
+  height: 25rem;
+  width: 15rem;
+  min-height: 22rem;
+  min-width: 13rem;
+  max-height: 90%;
+  max-width: 90%;
+}
+
+/*used by the js to turn on transitions when collapsing, then removed from element*/
+/*have to transition max-height as well because resize modifies el instance*/
+.collapsing {
+  transition: height .4s , max-height .4s, min-height .4s,
+  width .8s ease-in, max-width .8s ease-in, min-width .8s ease-in;
+  resize: none;
+}
+
+.expanding {
+  transition: height .8s ease-in, max-height .8s ease-in, min-height .8s ease-in,
+  width .2s, max-width .2s, min-width .2s;
+  resize: none;
+}
+
+
