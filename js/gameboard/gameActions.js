@@ -32,7 +32,8 @@ async function insertClicked(insert) {
   }
 }
 
-function moveTileTo(tile, x = null, y = null) {
+function moveTileTo(tile, x = null, y = null, duration = 1000) {
+  console.log('moveTileTo', tile, x, y)
   if (x === null && y === null) return;
   const el = document.getElementById('tile' + tile.id);
   const animation = el.animate([
@@ -44,7 +45,7 @@ function moveTileTo(tile, x = null, y = null) {
       top: `${y * gameConfig.tileHeight}rem`,
       left: `${x * gameConfig.tileWidth}rem`,
     }
-  ], {duration: 4000, iterations: 1});
+  ], {duration: duration, iterations: 1});
 
   tile.x = x;
   tile.y = y;
@@ -63,6 +64,14 @@ function moveTileTo(tile, x = null, y = null) {
     el.style.top = `${tile.y * gameConfig.tileHeight}rem`;
     el.style.left = `${tile.x * gameConfig.tileWidth}rem`;
   };
+}
+
+function rotateTileTo(tile, deg){
+  if(tile.rotation !== deg) {
+    const el = document.getElementById('tile' + tile.id);
+    tile.rotation = deg;
+    el.style.rotate = tile.rotation+'deg';
+  }
 }
 
 function moveRow(row, direction) {

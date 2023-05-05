@@ -6,7 +6,7 @@ const inserts = [];
 
 const gameConfig = {
   playerName: null,
-  autoResize: false,
+  animateStart: false,
   tileWidth: 8,
   tileHeight: 8,
   numCols: 4,
@@ -73,7 +73,7 @@ function populateUiSettingsFromConfig() {
   for (const [key, value] of Object.entries(gameConfig)) {
     const configElement = document.getElementById(key);
     if (configElement) {
-      if (configElement.id === 'autoResize') {
+      if (configElement.type === 'checkbox') {
         configElement.toggleAttribute('checked', Boolean(value));
       } else {
         configElement.value = value;

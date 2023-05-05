@@ -7,13 +7,7 @@ form {
   display: block;
   position: absolute;
   z-index: 1;
-
-  overflow: auto;
-  resize: both;
-
-
-  /*left: 0;*/
-  /*right: 0;*/
+  overflow: hidden;
 }
 
 form header {
@@ -63,11 +57,9 @@ form input[type=submit]:hover {
 }
 
 .collapsed {
-  display: block;
+  resize: none;
   height: 1.1rem;
   width: 5rem;
-  overflow: hidden;
-  resize: none;
   min-height: 1.1rem;
   min-width: 5rem;
   max-height: 1.1rem;
@@ -75,10 +67,11 @@ form input[type=submit]:hover {
 }
 
 .expanded {
+  resize: both;
   height: 25rem;
   width: 15rem;
-  min-height: 22rem;
-  min-width: 13rem;
+  min-height: 25rem;
+  min-width: 15rem;
   max-height: 90%;
   max-width: 90%;
 }
@@ -86,7 +79,7 @@ form input[type=submit]:hover {
 /*used by the js to turn on transitions when collapsing, then removed from element*/
 /*have to transition max-height as well because resize modifies el instance*/
 .collapsing {
-  transition: height .4s , max-height .4s, min-height .4s,
+  transition: height .4s, max-height .4s, min-height .4s,
   width .8s ease-in, max-width .8s ease-in, min-width .8s ease-in;
   resize: none;
 }

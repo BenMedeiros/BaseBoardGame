@@ -34,68 +34,77 @@
 <script src="js/main.js"></script>
 <script src="https://kit.fontawesome.com/974551802e.js" crossorigin="anonymous"></script>
 
+<header>
 
-<form id="gameConfig" class="collapsible expanded" onsubmit="return false">
-  <header>
-    <i class="fa-solid fa-bars"></i>
-    Settings
-  </header>
-  <label for="playerName">Player Name</label>
-  <input type="text" id="playerName" name="playerName" placeholder="your name">
-  <br/>
-  <label for="autoResize">Auto Resize</label>
-  <input type="checkbox" id="autoResize" name="autoResize" checked>
-  <br/>
+</header>
+<main>
 
-  <label for="tileHeight">Tile Height</label>
-  <input type="number" id="tileHeight" name="tileHeight">
-  <br/>
-  <label for="tileWidth">Tile Width:</label>
-  <input type="number" id="tileWidth" name="tileWidth">
-  <br/>
-  <label for="numRows">Rows</label>
-  <input type="number" id="numRows" name="numRows">
-  <br/>
-  <label for="numCols">Cols</label>
-  <input type="number" id="numCols" name="numCols">
-  <br/>
+  <form id="gameConfig" class="collapsible expanded" onsubmit="return false">
+    <header>
+      <i class="fa-solid fa-bars"></i>
+      Settings
+    </header>
+    <label for="playerName">Player Name</label>
+    <input type="text" id="playerName" name="playerName" placeholder="your name">
+    <br/>
+    <label for="animateStart">Animate Start</label>
+    <input type="checkbox" id="animateStart" name="animateStart" checked>
+    <br/>
 
-  <label for="country">Country</label>
-  <select id="country" name="country">
-    <option value="australia">Australia</option>
-    <option value="canada">Canada</option>
-    <option value="usa">USA</option>
-  </select>
-  <br/>
-  <br/>
-  <input type="submit" value="Update Board" onclick="updateBoard(this)">
-  <br/>
-  <div style="text-align: center; padding: 1rem; word-spacing: 1rem">
-    <i id="leftButton"
-       onclick="togglePlay(-1)"
-       class="fas fa-angle-double-left fa-2xl"
-    ></i>
-    <i id="pauseButton"
-       onclick="togglePlay(0)"
-       class="fa-solid fa-pause fa-2xl"
-    ></i>
-    <i id="rightButton"
-       onclick="togglePlay(1)"
-       class="fas fa-angle-double-right fa-2xl"
-    ></i>
-  </div>
-</form>
+    <label for="tileHeight">Tile Height</label>
+    <input type="number" id="tileHeight" name="tileHeight">
+    <br/>
+    <label for="tileWidth">Tile Width:</label>
+    <input type="number" id="tileWidth" name="tileWidth">
+    <br/>
+    <label for="numRows">Rows</label>
+    <input type="number" id="numRows" name="numRows">
+    <br/>
+    <label for="numCols">Cols</label>
+    <input type="number" id="numCols" name="numCols">
+    <br/>
 
-<progress value="0" max="1" style="position:absolute;right:1rem;bottom:1rem"></progress>
+    <label for="country">Country</label>
+    <select id="country" name="country">
+      <option value="australia">Australia</option>
+      <option value="canada">Canada</option>
+      <option value="usa">USA</option>
+    </select>
+    <br/>
+    <br/>
+    <input type="submit" value="Update Board" onclick="updateBoard(this)">
+    <br/>
+    <div style="text-align: center; padding: 1rem; word-spacing: 1rem">
+      <i id="leftButton"
+         onclick="togglePlay(-1)"
+         class="fas fa-angle-double-left fa-2xl"
+      ></i>
+      <i id="pauseButton"
+         onclick="togglePlay(0)"
+         class="fa-solid fa-pause fa-2xl"
+      ></i>
+      <i id="rightButton"
+         onclick="togglePlay(1)"
+         class="fas fa-angle-double-right fa-2xl"
+      ></i>
+    </div>
+  </form>
+
+  <progress value="0" max="1" style="position:absolute;right:1rem;bottom:1rem"></progress>
 
 
-<div id="gameboard" class="gameboard"></div>
-<script src="js/gameboard/settingsController.js"></script>
-<script src="js/gameboard/gameActions.js"></script>
-<script src="js/gameboard/gameData.js"></script>
-<script src="js/gameboard/htmlElementCreation.js"></script>
-<script src="js/gameboard/buildBoard.js"></script>
+  <div id="gameboard" class="gameboard"></div>
 
+
+</main>
+<footer>
+  <script src="js/common/utils.js"></script>
+  <script src="js/gameboard/settingsController.js"></script>
+  <script src="js/gameboard/gameActions.js"></script>
+  <script src="js/gameboard/gameData.js"></script>
+  <script src="js/gameboard/htmlElementCreation.js"></script>
+  <script src="js/gameboard/buildBoard.js"></script>
+</footer>
 <!--&lt;!&ndash; Google Analytics: change UA-XXXXX-Y to be your site's ID. &ndash;&gt;-->
 <!--<script>-->
 <!--  window.ga = function () {-->

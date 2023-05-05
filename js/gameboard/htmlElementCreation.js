@@ -14,17 +14,19 @@ function clearGameboardElement() {
 }
 
 function updateTileElement(el, tile) {
-  console.log('updateTileElement', tile);
   if (el === null) el = document.getElementById('tile' + tile.id);
   el.style.height = `${gameConfig.tileHeight}rem`;
   el.style.width = `${gameConfig.tileWidth}rem`;
   el.style.top = `${tile.y * gameConfig.tileHeight}rem`;
   el.style.left = `${tile.x * gameConfig.tileWidth}rem`;
 
+  el.style.rotate = tile.rotation + 'deg';
+
   if (tile.isActiveTile) {
     el.classList.add('active-tile');
   } else {
     el.classList.remove('active-tile');
+
   }
 
   el.title = JSON.stringify(tile);

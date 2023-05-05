@@ -3,9 +3,6 @@ body {
 }
 
 .gameboard {
-  /*width: 36rem;*/
-  /*height: 34rem;*/
-  /*aspect-ratio: 1 / 1;*/
   background-color: rosybrown;
   border-color: sandybrown;
   border-width: 2rem;
@@ -24,13 +21,13 @@ body {
   left: 1rem;
   width: 8rem;
   height: 8rem;
-  /*aspect-ratio: 1 / 1;*/
   background-color: darkseagreen;
   border-color: green;
   border-width: thick;
   font-size: larger;
   border-radius: 0.5rem;
   position: absolute;
+  transition: background-color 1s ease-in;
 }
 .tile:hover {
   border-color: darkgreen;
