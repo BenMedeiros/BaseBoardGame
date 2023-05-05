@@ -14,22 +14,24 @@ function clearGameboardElement() {
 }
 
 function updateTileElement(el, tile) {
+  console.log('updateTileElement', tile);
   if (el === null) el = document.getElementById('tile' + tile.id);
   el.style.height = `${gameConfig.tileHeight}rem`;
   el.style.width = `${gameConfig.tileWidth}rem`;
   el.style.top = `${tile.y * gameConfig.tileHeight}rem`;
   el.style.left = `${tile.x * gameConfig.tileWidth}rem`;
 
-  if(tile.isActiveTile) {
+  if (tile.isActiveTile) {
     el.classList.add('active-tile');
-  }else{
+  } else {
     el.classList.remove('active-tile');
   }
 
   el.title = JSON.stringify(tile);
+  el.textContent = tile.id
 }
 
-function createTileElements(tilesList){
+function createTileElements(tilesList) {
   const fragment = document.createDocumentFragment();
 
   for (const tile of tilesList) {

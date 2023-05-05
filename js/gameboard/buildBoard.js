@@ -7,7 +7,7 @@ function rebuildBoard() {
   updateGameboardElement();
 
   tiles.length = 0;
-  tiles.push({id :0, x : -1, y: -1, isActiveTile: true});
+  tiles.push({id: 0, x: -1, y: -1, isActiveTile: true});
   for (let x = 0; x < gameConfig.numCols; x++) {
     for (let y = 0; y < gameConfig.numRows; y++) {
       const tile = {id: tiles.length, x, y};
@@ -17,16 +17,24 @@ function rebuildBoard() {
   //build the control buttons/inserts
   inserts.length = 0;
   for (let i = 0; i < gameConfig.numCols; i++) {
-    const insert1 = {id: inserts.length, col: i, direction: 1};
-    inserts.push(insert1);
-    const insert2 = {id: inserts.length, col: i, direction: -1};
-    inserts.push(insert2);
+    inserts.push({
+      id: inserts.length, col: i,
+      direction: 1, x: i, y: -1
+    });
+    inserts.push({
+      id: inserts.length, col: i,
+      direction: -1, x: i, y: gameConfig.numCols
+    });
   }
   for (let i = 0; i < gameConfig.numRows; i++) {
-    const insert1 = {id: inserts.length, row: i, direction: 1};
-    inserts.push(insert1);
-    const insert2 = {id: inserts.length, row: i, direction: -1};
-    inserts.push(insert2);
+    inserts.push({
+      id: inserts.length, row: i,
+      direction: 1, x: -1, y: i
+    });
+    inserts.push({
+      id: inserts.length, row: i,
+      direction: -1, x: gameConfig.numCols, y: i
+    });
   }
 
   createTileElements(tiles);
@@ -37,7 +45,7 @@ function collapseSettingElement(event) {
   if (gameState.settingsExpanded) {
     const gameConfigEl = document.getElementById('gameConfig');
     gameState.settingsExpanded = false;
-    if(!gameConfigEl.classList.contains('collapsed')) gameConfigEl.classList.add('collapsed')
+    if (!gameConfigEl.classList.contains('collapsed')) gameConfigEl.classList.add('collapsed')
   }
 }
 
@@ -46,7 +54,7 @@ function expandSettingElement(event) {
   if (!gameState.settingsExpanded) {
     const gameConfigEl = document.getElementById('gameConfig');
     gameState.settingsExpanded = true;
-    if(gameConfigEl.classList.contains('collapsed')) gameConfigEl.classList.remove('collapsed');
+    if (gameConfigEl.classList.contains('collapsed')) gameConfigEl.classList.remove('collapsed');
   }
 }
 
