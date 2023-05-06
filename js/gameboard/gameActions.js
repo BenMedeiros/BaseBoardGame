@@ -33,7 +33,7 @@ async function insertClicked(insert) {
 }
 
 function moveTileTo(tile, x = null, y = null, duration = 1000) {
-  console.log('moveTileTo', tile, x, y)
+  // console.log('moveTileTo', tile, x, y)
   if (x === null && y === null) return;
   const el = document.getElementById('tile' + tile.id);
   const animation = el.animate([
@@ -71,6 +71,12 @@ function rotateTileTo(tile, deg){
     const el = document.getElementById('tile' + tile.id);
     tile.rotation = deg;
     el.style.rotate = tile.rotation+'deg';
+  }
+}
+
+function rotateTileBy(tile, deg){
+  if(deg){
+    rotateTileTo(tile, tile.rotation + deg);
   }
 }
 

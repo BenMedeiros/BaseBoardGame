@@ -27,7 +27,7 @@ body {
   font-size: larger;
   border-radius: 0.5rem;
   position: absolute;
-  transition: background-color 1s ease-in;
+  transition: background-color 1s ease-in, rotate 1.5s;
 }
 .tile:hover {
   border-color: darkgreen;
@@ -36,6 +36,7 @@ body {
 .tile.active-tile {
   border-color: darkblue;
   background-color: blue;
+  color: white;
 }
 
 .insert {
