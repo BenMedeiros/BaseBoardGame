@@ -15,17 +15,42 @@ function makeTileActive(tile) {
   gameState.activeTile = tile;
 }
 
-function disableInsert(insert){
-  insert.disabled = true;
-  const el = document.getElementById('insert' + insert.id);
-  el.toggleAttribute('disabled', true);
+function tempDisableAllInserts(duration) {
+  //could use promises here, but mainly just preventing spamming
+  if (tempStates.insertsTempDisabledTimeoutId) return;
+
+  const els = gameboardElement.querySelectorAll('.insert');
+  els.forEach(el => el.toggleAttribute('disabled', true));
+  // thought about promising against the animations but user waits too long
+  //if timeout exists, they should already be disabled..
+  tempStates.insertsTempDisabledTimeoutId = setTimeout(() => {
+    els.forEach(el => {
+      if (el.id === 'insert' + gameState.disabledInsertId) {
+        console.log(gameState.disabledInsertId + ' is currently disabled');
+      } else {
+        el.removeAttribute('disabled');
+      }
+    });
+    tempStates.insertsTempDisabledTimeoutId = null;
+  }, duration);
 }
 
-function enableInsert(insert){
+
+function disableInsert(insert) {
+  insert.disabled = true;
+  if (!tempStates.insertsTempDisabledTimeoutId) {
+    const el = document.getElementById('insert' + insert.id);
+    el.toggleAttribute('disabled', true);
+  }
+}
+
+function enableInsert(insert) {
   console.log('enabling ', insert);
   insert.disabled = false;
-  const el = document.getElementById('insert' + insert.id);
-  el.removeAttribute('disabled');
+  if (!tempStates.insertsTempDisabledTimeoutId) {
+    const el = document.getElementById('insert' + insert.id);
+    el.removeAttribute('disabled');
+  }
 }
 
 async function tileClicked(tile) {
@@ -43,23 +68,50 @@ function insertClicked(insert) {
   }
 }
 
-function moveTileTo(tile, x = null, y = null, duration = 1000) {
+// calculate the el.style.top based on x,y accounting for offsetting when on insert
+function calcTileStyleLeft(x, y) {
+  for (const insert of inserts) {
+    if (insert.x === x && insert.y === y) {
+      if (insert.row !== undefined) {
+        return `${(x - .2 * insert.direction) * gameConfig.tileHeight}rem`;
+      }
+    }
+  }
+  //not on an insert
+  return `${x * gameConfig.tileHeight}rem`;
+}
+
+// calculate the el.style.top based on x,y accounting for offsetting when on insert
+function calcTileStyleTop(x, y) {
+  for (const insert of inserts) {
+    if (insert.x === x && insert.y === y) {
+      if (insert.col !== undefined) {
+        return `${(y - .2 * insert.direction) * gameConfig.tileHeight}rem`;
+      }
+    }
+  }
+  //not on an insert
+  return `${y * gameConfig.tileHeight}rem`;
+}
+
+function moveTileTo(tile, x = null, y = null, duration = 3000) {
   // console.log('moveTileTo', tile, x, y)
   if (x === null && y === null) return;
   const el = document.getElementById('tile' + tile.id);
   const animation = el.animate([
     {
-      top: `${tile.y * gameConfig.tileHeight}rem`,
-      left: `${tile.x * gameConfig.tileWidth}rem`,
+      top: calcTileStyleTop(tile.x, tile.y),
+      left: calcTileStyleLeft(tile.x, tile.y)
     },
     {
-      top: `${y * gameConfig.tileHeight}rem`,
-      left: `${x * gameConfig.tileWidth}rem`,
+      top: calcTileStyleTop(x, y),
+      left: calcTileStyleLeft(x, y)
     }
   ], {duration: duration, iterations: 1});
 
   tile.x = x;
   tile.y = y;
+  el.title = JSON.stringify(tile);
 
   //update progress bar for fun
   const progressEl = document.getElementsByTagName("progress")[0];
@@ -68,12 +120,14 @@ function moveTileTo(tile, x = null, y = null, duration = 1000) {
     progressEl.value = animation.effect.getComputedTiming().progress;
   }, 50);
 
+  tempDisableAllInserts(duration);
+
   animation.onfinish = () => {
     clearInterval(intervalId);
     progressEl.value = 1;
     //persist the movement animation
-    el.style.top = `${tile.y * gameConfig.tileHeight}rem`;
-    el.style.left = `${tile.x * gameConfig.tileWidth}rem`;
+    el.style.top = calcTileStyleTop(tile.x, tile.y);
+    el.style.left = calcTileStyleLeft(tile.x, tile.y);
   };
 }
 
@@ -97,8 +151,6 @@ function moveRow(row, direction) {
       moveTileTo(tile, tile.x + direction, tile.y);
       if (tile.x === -1 || tile.x === gameConfig.numCols) {
         makeTileActive(tile);
-        //move it alittle off the board after it slides
-        moveTileTo(tile, tile.x + (direction * .2), tile.y);
       }
     }
   }
@@ -110,8 +162,6 @@ function moveColumn(col, direction) {
       moveTileTo(tile, tile.x, tile.y + direction);
       if (tile.y === -1 || tile.y === gameConfig.numRows) {
         makeTileActive(tile);
-        //move it alittle off the board after it slides
-        moveTileTo(tile, tile.x, tile.y + (direction * .2));
       }
     }
   }

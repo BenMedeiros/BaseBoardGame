@@ -39,6 +39,10 @@ const gameState = {
   disabledInsertId: null
 }
 
+const tempStates = {
+  insertsTempDisabledTimeoutId: null
+}
+
 Object.defineProperties(gameState, {
   activeTile: {
     get() {
@@ -69,7 +73,7 @@ function loadConfigFromStorage() {
   if (!localStorage.getItem('gameConfig')) saveConfigToStorage();
 
   const savedConfig = JSON.parse(localStorage.getItem('gameConfig'));
-  for (const [key, oldValue] of Object.entries(gameConfig)) {
+  for (const [key] of Object.entries(gameConfig)) {
     gameConfig[key] = savedConfig[key];
   }
 }

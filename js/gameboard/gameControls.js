@@ -12,9 +12,11 @@ document.addEventListener('keydown', (e) => {
         // down arrow
         break;
       case 'ArrowLeft':
+      case 'KeyQ':
         rotateTileBy(gameState.activeTile, -90);
         break;
       case 'ArrowRight':
+      case 'KeyE':
         rotateTileBy(gameState.activeTile, 90);
     }
 
