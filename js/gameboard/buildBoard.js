@@ -29,24 +29,24 @@ function rebuildBoard() {
     inserts.push({
       id: inserts.length, col: i,
       direction: 1, x: i, y: -1,
-      rotation: 90
+      rotation: 90, oppositeId: inserts.length + 1
     });
     inserts.push({
       id: inserts.length, col: i,
       direction: -1, x: i, y: gameConfig.numCols,
-      rotation: -90
+      rotation: -90, oppositeId: inserts.length - 1
     });
   }
   for (let i = 0; i < gameConfig.numRows; i++) {
     inserts.push({
       id: inserts.length, row: i,
       direction: 1, x: -1, y: i,
-      rotation: 0
+      rotation: 0, oppositeId: inserts.length + 1
     });
     inserts.push({
       id: inserts.length, row: i,
       direction: -1, x: gameConfig.numCols, y: i,
-      rotation: 180
+      rotation: 180, oppositeId: inserts.length - 1
     });
   }
 

@@ -15,13 +15,24 @@ function makeTileActive(tile) {
   gameState.activeTile = tile;
 }
 
-async function tileClicked(event) {
-  const tile = tiles[event.target.id.substr('tile'.length)];
+function disableInsert(insert){
+  insert.disabled = true;
+  const el = document.getElementById('insert' + insert.id);
+  el.toggleAttribute('disabled', true);
+}
+
+function enableInsert(insert){
+  console.log('enabling ', insert);
+  insert.disabled = false;
+  const el = document.getElementById('insert' + insert.id);
+  el.removeAttribute('disabled');
+}
+
+async function tileClicked(tile) {
   console.log('clicked', tile);
 }
 
-async function insertClicked(insert) {
-  console.log(insert);
+function insertClicked(insert) {
   if (insert.row !== undefined) {
     moveTileTo(gameState.activeTile, insert.x, insert.y);
     moveRow(insert.row, insert.direction);
@@ -66,16 +77,16 @@ function moveTileTo(tile, x = null, y = null, duration = 1000) {
   };
 }
 
-function rotateTileTo(tile, deg){
-  if(tile.rotation !== deg) {
+function rotateTileTo(tile, deg) {
+  if (tile.rotation !== deg) {
     const el = document.getElementById('tile' + tile.id);
     tile.rotation = deg;
-    el.style.rotate = tile.rotation+'deg';
+    el.style.rotate = tile.rotation + 'deg';
   }
 }
 
-function rotateTileBy(tile, deg){
-  if(deg){
+function rotateTileBy(tile, deg) {
+  if (deg) {
     rotateTileTo(tile, tile.rotation + deg);
   }
 }
@@ -105,3 +116,6 @@ function moveColumn(col, direction) {
     }
   }
 }
+
+document.addEventListener('insert-clicked', e => insertClicked(e.detail.insert));
+document.addEventListener('tile-clicked', e => tileClicked(e.detail.tile));

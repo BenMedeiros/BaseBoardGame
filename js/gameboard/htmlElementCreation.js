@@ -41,8 +41,10 @@ function createTileElements(tilesList) {
     el.classList.add('tile');
     el.id = 'tile' + tile.id;
     updateTileElement(el, tile);
-    el.onclick = tileClicked;
     fragment.appendChild(el);
+    el.onclick = (e) => {
+      document.dispatchEvent(new CustomEvent('tile-clicked', {detail: {tile}}));
+    };
   }
 
   gameboardElement.appendChild(fragment);
@@ -87,15 +89,17 @@ function createInsertElements(insertsList) {
 
     el.appendChild(icon);
     updateInsertElement(el, icon, insert);
-    el.onclick = insertClicked.bind(null, insert);
+    el.onclick = (e) => {
+      document.dispatchEvent(new CustomEvent('insert-clicked', {detail: {insert}}));
+    };
     gameboardElement.appendChild(el);
   }
 
   gameboardElement.appendChild(fragment);
 }
 
-function applyInsertIcon(iconEl, rotation){
+function applyInsertIcon(iconEl, rotation) {
   iconEl.classList.add("material-icons");
   iconEl.innerText = 'double_arrow';
-  iconEl.style.rotate = rotation+'deg';
+  iconEl.style.rotate = rotation + 'deg';
 }

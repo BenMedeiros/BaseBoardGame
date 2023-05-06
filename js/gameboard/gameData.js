@@ -35,7 +35,8 @@ const gameState = {
   lastInsertionPoint: null,
   settingsExpanded: true,
   activeTileId: 0,
-  activeTileIdHistory: []
+  activeTileIdHistory: [],
+  disabledInsertId: null
 }
 
 Object.defineProperties(gameState, {
@@ -52,7 +53,15 @@ Object.defineProperties(gameState, {
     get() {
       return tiles[this.activeTileIdHistory[this.activeTileIdHistory.length-1]];
     }
-  }
+  },
+  disabledInsert: {
+    get() {
+      return inserts[this.disabledInsertId];
+    },
+    set(insert) {
+      this.disabledInsertId = insert.id;
+    }
+  },
 });
 
 
