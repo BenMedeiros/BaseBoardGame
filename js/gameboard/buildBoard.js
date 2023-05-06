@@ -28,21 +28,25 @@ function rebuildBoard() {
   for (let i = 0; i < gameConfig.numCols; i++) {
     inserts.push({
       id: inserts.length, col: i,
-      direction: 1, x: i, y: -1
+      direction: 1, x: i, y: -1,
+      rotation: 90
     });
     inserts.push({
       id: inserts.length, col: i,
-      direction: -1, x: i, y: gameConfig.numCols
+      direction: -1, x: i, y: gameConfig.numCols,
+      rotation: -90
     });
   }
   for (let i = 0; i < gameConfig.numRows; i++) {
     inserts.push({
       id: inserts.length, row: i,
-      direction: 1, x: -1, y: i
+      direction: 1, x: -1, y: i,
+      rotation: 0
     });
     inserts.push({
       id: inserts.length, row: i,
-      direction: -1, x: gameConfig.numCols, y: i
+      direction: -1, x: gameConfig.numCols, y: i,
+      rotation: 180
     });
   }
 

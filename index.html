@@ -32,7 +32,9 @@
 <script src="js/vendor/modernizr-3.11.2.min.js"></script>
 <script src="js/plugins.js"></script>
 <script src="js/main.js"></script>
-<script src="https://kit.fontawesome.com/974551802e.js" crossorigin="anonymous"></script>
+<!--<script src="https://kit.fontawesome.com/974551802e.js" crossorigin="anonymous"></script>-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 
 <header>
 
@@ -41,8 +43,7 @@
 
   <form id="gameConfig" class="collapsible expanded" onsubmit="return false">
     <header>
-      <i class="fa-solid fa-bars"></i>
-      Settings
+      <span><i class="material-icons">settings</i> Settings</span>
     </header>
     <label for="playerName">Player Name</label>
     <input type="text" id="playerName" name="playerName" placeholder="your name">
@@ -73,21 +74,6 @@
     <br/>
     <br/>
     <input type="submit" value="Update Board" onclick="updateBoard(this)">
-    <br/>
-    <div style="text-align: center; padding: 1rem; word-spacing: 1rem">
-      <i id="leftButton"
-         onclick="togglePlay(-1)"
-         class="fas fa-angle-double-left fa-2xl"
-      ></i>
-      <i id="pauseButton"
-         onclick="togglePlay(0)"
-         class="fa-solid fa-pause fa-2xl"
-      ></i>
-      <i id="rightButton"
-         onclick="togglePlay(1)"
-         class="fas fa-angle-double-right fa-2xl"
-      ></i>
-    </div>
   </form>
 
   <progress value="0" max="1" style="position:absolute;right:1rem;bottom:1rem"></progress>

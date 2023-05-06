@@ -57,10 +57,8 @@ function updateInsertElement(el, iconEl, insert) {
     el.style.top = `${(insert.row + .25) * gameConfig.tileHeight}rem`;
     if (insert.direction > 0) {
       el.style.left = `${gameConfig.tileWidth / -2}rem`;
-      iconEl.classList.add("fa-circle-arrow-right");
     } else {
       el.style.left = `${gameConfig.boardWidth}rem`;
-      iconEl.classList.add("fa-circle-arrow-left");
     }
   }
 
@@ -69,10 +67,8 @@ function updateInsertElement(el, iconEl, insert) {
     el.style.left = `${(insert.col + .25) * gameConfig.tileWidth}rem`;
     if (insert.direction > 0) {
       el.style.top = `${gameConfig.tileHeight / -2}rem`;
-      iconEl.classList.add("fa-circle-arrow-down");
     } else {
       el.style.top = `${gameConfig.boardHeight}rem`;
-      iconEl.classList.add("fa-circle-arrow-up");
     }
   }
 
@@ -87,8 +83,7 @@ function createInsertElements(insertsList) {
     el.classList.add('insert');
     el.id = 'insert' + insert.id;
     const icon = document.createElement("i");
-    icon.classList.add("fa-solid");
-    icon.classList.add("fa-xl");
+    applyInsertIcon(icon, insert.rotation);
 
     el.appendChild(icon);
     updateInsertElement(el, icon, insert);
@@ -99,3 +94,8 @@ function createInsertElements(insertsList) {
   gameboardElement.appendChild(fragment);
 }
 
+function applyInsertIcon(iconEl, rotation){
+  iconEl.classList.add("material-icons");
+  iconEl.innerText = 'double_arrow';
+  iconEl.style.rotate = rotation+'deg';
+}

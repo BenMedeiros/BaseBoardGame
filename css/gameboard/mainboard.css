@@ -2,6 +2,10 @@ body {
   background-color: grey;
 }
 
+i {
+  vertical-align: bottom;
+}
+
 .gameboard {
   background-color: rosybrown;
   border-color: sandybrown;

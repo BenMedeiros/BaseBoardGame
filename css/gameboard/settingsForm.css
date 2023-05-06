@@ -59,11 +59,11 @@ form input[type=submit]:hover {
 .collapsed {
   resize: none;
   height: 1.1rem;
-  width: 5rem;
+  width: 6rem;
   min-height: 1.1rem;
-  min-width: 5rem;
+  min-width: 6rem;
   max-height: 1.1rem;
-  max-width: 5rem;
+  max-width: 6rem;
 }
 
 .expanded {
