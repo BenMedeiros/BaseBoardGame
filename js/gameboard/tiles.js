@@ -37,20 +37,52 @@ function areTilesConnectedAdjacent(tile1, tile2) {
   } else if (xDistance === -1 && yDistance === 0) {
     tile1RotationIndex += 3;
     tile2RotationIndex += 1;
-  }else{
+  } else {
     return false;
   }
 
   tile1RotationIndex %= 4;
   tile2RotationIndex %= 4;
 
-  if (tilePaths[tile1.type][tile1RotationIndex] && tilePaths[tile2.type][tile2RotationIndex]) {
-    return true;
-  } else {
-    return false;
-  }
+  return tilePaths[tile1.type][tile1RotationIndex] && tilePaths[tile2.type][tile2RotationIndex];
 }
+
 // gets possible connected paths, brute force
-function getAllConnectedAdjacentTiles(thisTile){
+function getAllConnectedAdjacentTiles(thisTile) {
   return tiles.filter(tile => areTilesConnectedAdjacent(tile, thisTile));
+}
+
+//includes thisTile
+function getAllConnectedTiles(thisTile, connectedTiles = []) {
+  if (connectedTiles.length === 0) connectedTiles.push(thisTile);
+  for (const tile of getAllConnectedAdjacentTiles(thisTile)) {
+    if (!connectedTiles.find(el => el.id === tile.id)) {
+      connectedTiles.push(tile);
+      getAllConnectedTiles(tile, connectedTiles);
+    }
+  }
+  return connectedTiles;
+}
+
+function highlightAllConnectedTiles(thisTile) {
+  for (const tile of tiles) {
+    const el = document.getElementById('tile' + tile.id);
+    el.classList.remove('connected-tiles');
+    el.classList.add('unconnected-tiles');
+  }
+  for (const tile of getAllConnectedTiles(thisTile)) {
+    const el = document.getElementById('tile' + tile.id);
+    el.classList.remove('unconnected-tiles');
+    el.classList.add('connected-tiles');
+  }
+
+  setTimeout(removeConnectedTilesHighlights, 1500);
+}
+
+function removeConnectedTilesHighlights() {
+  for (const tile of tiles) {
+    const el = document.getElementById('tile' + tile.id);
+    el.classList.remove('unconnected-tiles');
+    el.classList.remove('connected-tiles');
+  }
 }

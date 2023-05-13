@@ -33,13 +33,9 @@ i {
   font-size: larger;
   border-radius: 0.5rem;
   position: absolute;
-  transition: background-color 1s ease-in, rotate 1.5s;
+  transition: background-color 1s ease-in, rotate 1.5s, filter 1.5s;
   z-index: 20;
-}
 
-.tile:hover {
-  border-color: darkgreen;
-  background-color: darkgreen;
 }
 
 .insert {
@@ -85,4 +81,16 @@ i {
   background-color: blue;
   color: white;
   border-width: unset;
+}
+
+.tile:hover {
+  border-color: darkgreen;
+  border-width: .1rem;
+}
+
+.tile.connected-tiles {
+  /*filter: brightness(100%);*/
+}
+.tile.unconnected-tiles {
+  filter: brightness(50%);
 }
