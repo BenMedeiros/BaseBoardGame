@@ -6,4 +6,4 @@ function disableInverseMove(insert) {
 }
 
 
-document.addEventListener('insert-clicked', e => disableInverseMove(e.detail.insert));
+document.addEventListener('insert-clicked-success', e => disableInverseMove(e.detail.insert));

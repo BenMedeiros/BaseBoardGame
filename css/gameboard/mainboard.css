@@ -13,7 +13,8 @@ i {
   border-style: double;
   /*centers when position:absolute*/
   position: absolute;
-  margin: auto;
+  /*put the game board slightly lower for header bar*/
+  margin: 5rem auto;
   left: 0;
   right: 0;
   bottom: 0;
@@ -26,8 +27,8 @@ i {
   left: 1rem;
   width: 8rem;
   height: 8rem;
-  background-color: darkseagreen;
-  border-color: green;
+  /*background-color: darkseagreen;*/
+  /*border-color: green;*/
   border-width: thick;
   font-size: larger;
   border-radius: 0.5rem;
@@ -35,10 +36,12 @@ i {
   transition: background-color 1s ease-in, rotate 1.5s;
   z-index: 20;
 }
+
 .tile:hover {
   border-color: darkgreen;
   background-color: darkgreen;
 }
+
 .tile.active-tile {
   border-color: darkblue;
   background-color: blue;
@@ -53,3 +56,31 @@ i {
   z-index: 10;
 }
 
+.tile.tile-road-tiles {
+  background-color: #8BB54A;
+  border-color: #8BB54A;
+  border-width: 0;
+  background-image: url(/img/4bit_road_tiles.png);
+  background-size: 480px 500px;
+  background-repeat: no-repeat;
+}
+
+.tile.tile-plus {
+  background-position: -14px -18px;
+}
+
+.tile.tile-t {
+  background-position: -14px -142px;
+}
+
+.tile.tile-straight {
+  background-position: -132px -142px;
+}
+
+.tile.tile-turn {
+  background-position: -250px -142px;
+}
+
+.tile.tile-end {
+  background-position: -368px -142px;
+}

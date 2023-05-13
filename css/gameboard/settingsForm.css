@@ -3,9 +3,10 @@ form {
   border: .2rem black dashed;
   background-color: #f2f2f2;
   padding: 1rem;
-  margin: 1rem 1rem auto;
   display: block;
-  position: absolute;
+  /*position: absolute;*/
+  /*to remain at top of page*/
+  position: fixed;
   z-index: 100;
   overflow: hidden;
 }
@@ -14,6 +15,12 @@ form header {
   font-size: large;
   padding-bottom: .8rem;
   user-select: none;
+}
+
+@media screen and (max-width: 600px) {
+  form label, input, select {
+    font-size: 7vw;
+  }
 }
 
 form label {
@@ -74,6 +81,18 @@ form input[type=submit]:hover {
   min-width: 15rem;
   max-height: 90%;
   max-width: 90%;
+}
+
+@media screen and (max-width: 600px) {
+  .expanded {
+    resize: none;
+    height: auto;
+    width: 90%;
+    max-width: 100%;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
 }
 
 /*used by the js to turn on transitions when collapsing, then removed from element*/

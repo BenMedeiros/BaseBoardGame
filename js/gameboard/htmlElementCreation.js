@@ -5,6 +5,7 @@ const gameboardElement = document.getElementById("gameboard");
 function updateGameboardElement() {
   gameboardElement.style.width = gameConfig.boardWidth + 'rem';
   gameboardElement.style.height = gameConfig.boardHeight + 'rem';
+  gameboardElement.style.borderWidth = (gameConfig.tileWidth * 1.3) + 'rem';
 }
 
 function clearGameboardElement() {
@@ -26,7 +27,6 @@ function updateTileElement(el, tile) {
     el.classList.add('active-tile');
   } else {
     el.classList.remove('active-tile');
-
   }
 
   el.title = JSON.stringify(tile);
@@ -39,6 +39,8 @@ function createTileElements(tilesList) {
   for (const tile of tilesList) {
     const el = document.createElement("button");
     el.classList.add('tile');
+    el.classList.add('tile-road-tiles');
+    el.classList.add(tileTypes[tile.type]);
     el.id = 'tile' + tile.id;
     updateTileElement(el, tile);
     fragment.appendChild(el);

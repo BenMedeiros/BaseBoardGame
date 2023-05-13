@@ -11,6 +11,7 @@ function addTempTransitionClass(el, cssClassName) {
 }
 
 function collapseSettingElement(event) {
+  // console.log('collpase-click', event);
   if (gameState.settingsExpanded) {
     const gameConfigEl = document.querySelector('.collapsible');
     gameState.settingsExpanded = false;
@@ -23,6 +24,7 @@ function collapseSettingElement(event) {
 }
 
 function expandSettingElement(event) {
+  // console.log('expand-click', event);
   event.stopPropagation();
   if (!gameState.settingsExpanded) {
     const gameConfigEl = document.querySelector('.collapsible');

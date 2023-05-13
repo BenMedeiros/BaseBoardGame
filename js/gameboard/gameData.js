@@ -4,11 +4,19 @@
 const tiles = [];
 const inserts = [];
 
+const tileTypes = {
+  plus: 'tile-plus',
+  t: 'tile-t',
+  straight: 'tile-straight',
+  turn: 'tile-turn',
+  end: 'tile-end'
+}
+
 const gameConfig = {
   playerName: null,
   animateStart: false,
   tileWidth: 8,
-  tileHeight: 8,
+  // tileHeight: 8,
   numCols: 4,
   numRows: 4
 };
@@ -17,6 +25,11 @@ Object.defineProperties(gameConfig, {
   numTiles: {
     get() {
       return (this.numRows * this.numCols) + 1
+    }
+  },
+  tileHeight : {
+    get() {
+      return this.tileWidth
     }
   },
   boardWidth: {
@@ -32,7 +45,6 @@ Object.defineProperties(gameConfig, {
 });
 
 const gameState = {
-  lastInsertionPoint: null,
   settingsExpanded: true,
   activeTileId: 0,
   activeTileIdHistory: [],

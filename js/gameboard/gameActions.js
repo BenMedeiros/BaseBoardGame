@@ -26,7 +26,7 @@ function tempDisableAllInserts(duration) {
   tempStates.insertsTempDisabledTimeoutId = setTimeout(() => {
     els.forEach(el => {
       if (el.id === 'insert' + gameState.disabledInsertId) {
-        console.log(gameState.disabledInsertId + ' is currently disabled');
+        // console.log(gameState.disabledInsertId + ' is currently disabled');
       } else {
         el.removeAttribute('disabled');
       }
@@ -57,7 +57,23 @@ async function tileClicked(tile) {
   console.log('clicked', tile);
 }
 
+function triggerInsertClickedByXY(x,y){
+  for (const insert of inserts) {
+    if(insert.disabled) continue;
+    if (insert.x === x && insert.y === y) {
+      document.dispatchEvent(new CustomEvent('insert-clicked', {detail: {insert}}));
+      return;
+    }
+  }
+}
+
 function insertClicked(insert) {
+  //don't trigger if currently disabled
+  if(tempStates.insertsTempDisabledTimeoutId) return;
+  if(insert.disabled) return;
+  if(insert.row === undefined && insert.col === undefined){
+    throw new Error('not sure what config this insert is.')
+  }
   if (insert.row !== undefined) {
     moveTileTo(gameState.activeTile, insert.x, insert.y);
     moveRow(insert.row, insert.direction);
@@ -66,6 +82,8 @@ function insertClicked(insert) {
     moveTileTo(gameState.activeTile, insert.x, insert.y);
     moveColumn(insert.col, insert.direction);
   }
+  document.dispatchEvent(new CustomEvent('insert-clicked-success', {detail: {insert}}));
+
 }
 
 // calculate the el.style.top based on x,y accounting for offsetting when on insert
@@ -94,7 +112,7 @@ function calcTileStyleTop(x, y) {
   return `${y * gameConfig.tileHeight}rem`;
 }
 
-function moveTileTo(tile, x = null, y = null, duration = 3000) {
+function moveTileTo(tile, x = null, y = null, duration = 2000) {
   // console.log('moveTileTo', tile, x, y)
   if (x === null && y === null) return;
   const el = document.getElementById('tile' + tile.id);

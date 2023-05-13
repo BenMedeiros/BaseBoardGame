@@ -8,3 +8,7 @@ utils.randomInt = (min = 0, max = 100) => {
 utils.randomFrom = (enumList) => {
   return enumList[utils.randomInt(0, enumList.length -1)];
 }
+
+utils.between =  (low, med, high) => {
+  return low < med && med < high;
+}
