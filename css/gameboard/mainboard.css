@@ -1,5 +1,5 @@
 body {
-  background-color: grey;
+  background-color: #6A6A6A;
 }
 
 i {
@@ -7,8 +7,8 @@ i {
 }
 
 .gameboard {
-  background-color: rosybrown;
-  border-color: sandybrown;
+  background-color: #D9D3BF;
+  border-color: #8BB54A;
   border-width: 2rem;
   border-style: double;
   /*centers when position:absolute*/
@@ -42,12 +42,6 @@ i {
   background-color: darkgreen;
 }
 
-.tile.active-tile {
-  border-color: darkblue;
-  background-color: blue;
-  color: white;
-}
-
 .insert {
   background-color: indianred;
   position: absolute;
@@ -61,26 +55,34 @@ i {
   border-color: #8BB54A;
   border-width: 0;
   background-image: url(/img/4bit_road_tiles.png);
-  background-size: 480px 500px;
+  /*background-size: 480px 500px;*/
+  background-size: 500% 500%;
   background-repeat: no-repeat;
 }
 
 .tile.tile-plus {
-  background-position: -14px -18px;
+  background-position: 3.5% 4.4%;
 }
 
 .tile.tile-t {
-  background-position: -14px -142px;
+  background-position: 4% 35%;
 }
 
 .tile.tile-straight {
-  background-position: -132px -142px;
+  background-position: 34.5% 35%;
 }
 
 .tile.tile-turn {
-  background-position: -250px -142px;
+  background-position: 65.5% 35%;
 }
 
 .tile.tile-end {
-  background-position: -368px -142px;
+  background-position: 96% 35%;
+}
+
+.tile.active-tile {
+  border-color: darkblue;
+  background-color: blue;
+  color: white;
+  border-width: unset;
 }

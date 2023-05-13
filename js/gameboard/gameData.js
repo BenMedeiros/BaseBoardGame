@@ -1,16 +1,7 @@
 'use strict';
 
 
-const tiles = [];
-const inserts = [];
-
-const tileTypes = {
-  plus: 'tile-plus',
-  t: 'tile-t',
-  straight: 'tile-straight',
-  turn: 'tile-turn',
-  end: 'tile-end'
-}
+const inserts = []
 
 const gameConfig = {
   playerName: null,
