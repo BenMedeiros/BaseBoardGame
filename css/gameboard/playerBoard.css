@@ -21,6 +21,11 @@
   font-weight: bold;
 }
 
-.score {
+.player-score {
   float: right;
+}
+
+.player-status {
+  /*noinspection CssInvalidPropertyValue*/
+  inline-size: -webkit-fill-available;
 }

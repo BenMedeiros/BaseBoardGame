@@ -16,25 +16,30 @@ function makeTileActive(tile) {
 }
 
 function tempDisableAllInserts(duration) {
-  //could use promises here, but mainly just preventing spamming
-  if (tempStates.insertsTempDisabledTimeoutId) return;
-
-  const els = gameboardElement.querySelectorAll('.insert');
-  els.forEach(el => el.toggleAttribute('disabled', true));
-  // thought about promising against the animations but user waits too long
-  //if timeout exists, they should already be disabled..
-  tempStates.insertsTempDisabledTimeoutId = setTimeout(() => {
-    els.forEach(el => {
-      if (el.id === 'insert' + gameState.disabledInsertId) {
-        // console.log(gameState.disabledInsertId + ' is currently disabled');
-      } else {
-        el.removeAttribute('disabled');
-      }
-    });
-    tempStates.insertsTempDisabledTimeoutId = null;
-  }, duration);
+  if (tempStates.insertsTempDisabledTimeoutId) {
+    //clear existing timeout and recreate with new duration
+    clearTimeout(tempStates.insertsTempDisabledTimeoutId);
+  } else {
+    const els = gameboardElement.querySelectorAll('.insert');
+    els.forEach(el => el.toggleAttribute('disabled', true));
+  }
+  tempStates.insertsTempDisabledTimeoutId = setTimeout(enableTempDisabledInserts, duration);
 }
 
+function enableTempDisabledInserts() {
+  //keep disabled unless it's a player move tile turn
+  tempStates.insertsTempDisabledTimeoutId = null;
+  if(gameState.activePlayerStep !== ACTIVE_PLAYER_STEPS.INSERT_TILE) return;
+
+  const els = gameboardElement.querySelectorAll('.insert');
+  els.forEach(el => {
+    if (el.id === 'insert' + gameState.disabledInsertId) {
+      // console.log(gameState.disabledInsertId + ' is currently disabled');
+    } else {
+      el.removeAttribute('disabled');
+    }
+  });
+}
 
 function disableInsert(insert) {
   insert.disabled = true;
@@ -57,9 +62,9 @@ async function tileClicked(tile) {
   console.log('clicked', tile);
 }
 
-function triggerInsertClickedByXY(x,y){
+function triggerInsertClickedByXY(x, y) {
   for (const insert of inserts) {
-    if(insert.disabled) continue;
+    if (insert.disabled) continue;
     if (insert.x === x && insert.y === y) {
       document.dispatchEvent(new CustomEvent('insert-clicked', {detail: {insert}}));
       return;
@@ -69,9 +74,9 @@ function triggerInsertClickedByXY(x,y){
 
 function insertClicked(insert) {
   //don't trigger if currently disabled
-  if(tempStates.insertsTempDisabledTimeoutId) return;
-  if(insert.disabled) return;
-  if(insert.row === undefined && insert.col === undefined){
+  if (tempStates.insertsTempDisabledTimeoutId) return;
+  if (insert.disabled) return;
+  if (insert.row === undefined && insert.col === undefined) {
     throw new Error('not sure what config this insert is.')
   }
   if (insert.row !== undefined) {

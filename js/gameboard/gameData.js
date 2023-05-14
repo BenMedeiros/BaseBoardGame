@@ -10,7 +10,7 @@ const gameConfig = {
   // tileHeight: 8,
   numCols: 4,
   numRows: 4,
-  theme : null
+  theme: null
 };
 
 Object.defineProperties(gameConfig, {
@@ -19,7 +19,7 @@ Object.defineProperties(gameConfig, {
       return (this.numRows * this.numCols) + 1
     }
   },
-  tileHeight : {
+  tileHeight: {
     get() {
       return this.tileWidth
     }
@@ -41,8 +41,15 @@ const gameState = {
   activeTileId: 0,
   activeTileIdHistory: [],
   disabledInsertId: null,
-  activePlayerId: null
+  activePlayerId: null,
+  activePlayerStep: 0
 }
+
+const ACTIVE_PLAYER_STEPS = {
+  INACTIVE: 0,
+  INSERT_TILE : 1,
+  MOVE_CHARACTER: 2
+};
 
 const tempStates = {
   insertsTempDisabledTimeoutId: null
@@ -60,7 +67,7 @@ Object.defineProperties(gameState, {
   },
   lastActiveTile: {
     get() {
-      return tiles[this.activeTileIdHistory[this.activeTileIdHistory.length-1]];
+      return tiles[this.activeTileIdHistory[this.activeTileIdHistory.length - 1]];
     }
   },
   disabledInsert: {
