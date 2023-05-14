@@ -14,7 +14,8 @@ i {
   /*centers when position:absolute*/
   position: absolute;
   /*put the game board slightly lower for header bar*/
-  margin: 5rem auto;
+  /*give room on right side for scoreboard*/
+  margin: 5rem 15rem auto auto;
   left: 0;
   right: 0;
   bottom: 0;

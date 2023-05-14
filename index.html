@@ -23,6 +23,7 @@
 
   <link rel="stylesheet" href="css/gameboard/mainboard.css">
   <link rel="stylesheet" href="css/gameboard/settingsForm.css">
+  <link rel="stylesheet" href="css/gameboard/playerBoard.css">
 
 
 </head>
@@ -42,9 +43,9 @@
 <main>
 
   <form id="gameConfig" class="collapsible expanded" onsubmit="return false">
-    <header>
+    <h3>
       <span><i class="material-icons">settings</i> Settings</span>
-    </header>
+    </h3>
     <label for="playerName">Player Name</label>
     <input type="text" id="playerName" name="playerName" placeholder="your name">
     <br/>
@@ -65,11 +66,9 @@
     <input type="number" id="numCols" name="numCols">
     <br/>
 
-    <label for="country">Country</label>
-    <select id="country" name="country">
-      <option value="australia">Australia</option>
-      <option value="canada">Canada</option>
-      <option value="usa">USA</option>
+    <label for="theme">Theme</label>
+    <select id="theme" name="theme">
+      <option value="pokemon">Pokemon</option>
     </select>
     <br/>
     <br/>
@@ -78,16 +77,21 @@
 
   <progress value="0" max="1" style="position:absolute;right:1rem;bottom:1rem"></progress>
 
-
   <div id="gameboard" class="gameboard"></div>
+
+  <div id="scoreboard" name="scoreboard" class="scoreboard">
+    <h4>Players <span style="float:right"><b>2</b></span></h4>
+    <!--    js inserts players here-->
+  </div>
 
 
 </main>
 <footer>
   <script src="js/common/utils.js"></script>
-  <script src="js/gameboard/settingsController.js"></script>
-  <script src="js/gameboard/gameActions.js"></script>
   <script src="js/gameboard/gameData.js"></script>
+  <script src="js/gameboard/settingsController.js"></script>
+  <script src="js/gameboard/playerController.js"></script>
+  <script src="js/gameboard/gameActions.js"></script>
   <script src="js/gameboard/tiles.js"></script>
   <script src="js/gameboard/htmlElementCreation.js"></script>
   <script src="js/gameboard/buildBoard.js"></script>

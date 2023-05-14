@@ -1,19 +1,20 @@
 form {
+  background-color: #2f3032;
+  color: white;
+  font-family: Arial;
+  padding: 0 1rem 1rem 1rem;
+  border: 1px solid lightgrey;
   border-radius: .5rem;
-  border: .2rem black dashed;
-  background-color: #f2f2f2;
-  padding: 1rem;
+  margin: 0.5rem;
+  float: left;
+  width: 15rem;
+  height: auto;
   display: block;
   /*position: absolute;*/
   /*to remain at top of page*/
   position: fixed;
   z-index: 100;
   overflow: hidden;
-}
-
-form header {
-  font-size: large;
-  padding-bottom: .8rem;
   user-select: none;
 }
 
@@ -26,7 +27,7 @@ form header {
 form label {
   text-align: right;
   display: inline-block;
-  width: 40%;
+  width: 50%;
   user-select: none;
 }
 
@@ -37,6 +38,7 @@ form input, select {
   border: 1px solid #ccc;
   border-radius: .5rem;
   box-sizing: border-box;
+  user-select: auto;
 }
 
 form input:hover, select:hover {
@@ -60,27 +62,26 @@ form input[type=submit]:hover {
 
 
 .collapsible {
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 .collapsed {
-  resize: none;
-  height: 1.1rem;
-  width: 6rem;
-  min-height: 1.1rem;
-  min-width: 6rem;
-  max-height: 1.1rem;
-  max-width: 6rem;
+  height: 3rem;
+  width: 10rem;
+  transition: height 1s, width .8s ease-in;
+
 }
 
 .expanded {
-  resize: both;
-  height: 25rem;
-  width: 15rem;
-  min-height: 25rem;
-  min-width: 15rem;
-  max-height: 90%;
-  max-width: 90%;
+  transition: height .4s, width .8s ease-in;
+
+  /*resize: both;*/
+  /*height: 25rem;*/
+  /*width: 15rem;*/
+  /*min-height: 25rem;*/
+  /*min-width: 15rem;*/
+  /*max-height: 90%;*/
+  /*max-width: 90%;*/
 }
 
 @media screen and (max-width: 600px) {
@@ -98,15 +99,11 @@ form input[type=submit]:hover {
 /*used by the js to turn on transitions when collapsing, then removed from element*/
 /*have to transition max-height as well because resize modifies el instance*/
 .collapsing {
-  transition: height .4s, max-height .4s, min-height .4s,
-  width .8s ease-in, max-width .8s ease-in, min-width .8s ease-in;
-  resize: none;
+  /*transition: height .4s, width .8s ease-in;*/
 }
 
 .expanding {
-  transition: height .8s ease-in, max-height .8s ease-in, min-height .8s ease-in,
-  width .2s, max-width .2s, min-width .2s;
-  resize: none;
+  /*transition: height .8s ease-in, width .2s;*/
 }
 
 

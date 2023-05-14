@@ -9,7 +9,8 @@ const gameConfig = {
   tileWidth: 8,
   // tileHeight: 8,
   numCols: 4,
-  numRows: 4
+  numRows: 4,
+  theme : null
 };
 
 Object.defineProperties(gameConfig, {
@@ -39,7 +40,8 @@ const gameState = {
   settingsExpanded: true,
   activeTileId: 0,
   activeTileIdHistory: [],
-  disabledInsertId: null
+  disabledInsertId: null,
+  activePlayerId: null
 }
 
 const tempStates = {

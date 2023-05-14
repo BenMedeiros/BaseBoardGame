@@ -64,7 +64,21 @@ function getAllConnectedTiles(thisTile, connectedTiles = []) {
   return connectedTiles;
 }
 
-function highlightAllConnectedTiles(thisTile) {
+function highlightTile(thisTile, duration = 1500){
+  for (const tile of tiles) {
+    const el = document.getElementById('tile' + tile.id);
+    el.classList.remove('connected-tiles');
+    el.classList.add('unconnected-tiles');
+  }
+
+  const el = document.getElementById('tile' + thisTile.id);
+  el.classList.remove('unconnected-tiles');
+  el.classList.add('connected-tiles');
+
+  setTimeout(removeConnectedTilesHighlights, duration);
+}
+
+function highlightAllConnectedTiles(thisTile, duration = 1500) {
   for (const tile of tiles) {
     const el = document.getElementById('tile' + tile.id);
     el.classList.remove('connected-tiles');
@@ -76,7 +90,7 @@ function highlightAllConnectedTiles(thisTile) {
     el.classList.add('connected-tiles');
   }
 
-  setTimeout(removeConnectedTilesHighlights, 1500);
+  setTimeout(removeConnectedTilesHighlights, duration);
 }
 
 function removeConnectedTilesHighlights() {

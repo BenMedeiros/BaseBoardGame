@@ -1,0 +1,26 @@
+#scoreboard {
+  background-color: #2f3032;
+  color: white;
+  font-family: Arial;
+  padding: 0 1rem 1rem 1rem;
+  border: 1px solid lightgrey;
+  border-radius: .5rem;
+  margin: 0.5rem;
+  float: right;
+  width: 10rem;
+  height: auto;
+  user-select: none;
+}
+
+.player {
+  border: .1rem solid rgba(0, 0, 0, 0);
+  padding: .5rem;
+}
+.active-player {
+  border: .1rem solid #8bb54a;
+  font-weight: bold;
+}
+
+.score {
+  float: right;
+}
