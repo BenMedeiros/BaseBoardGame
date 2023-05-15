@@ -2,31 +2,58 @@
 
 const players = [];
 
-function setPlayerCount(){
+function setPlayerCount() {
   const el = document.getElementById('player-count');
-  el.innerText = players.length+'';
+  el.innerText = players.length + '';
 }
 
 function addPlayer(name) {
   const player = {
     id: players.length,
     name,
-    score: 0
+    score: 0,
+    icon: '/img/gengar_action_figure.png',
+    x: -1,
+    y: -1
   };
+  Object.defineProperties(player, {
+    elId_playerName: {
+      get() {
+        return 'player-name' + this.id
+      }
+    },
+    elId_playerScore: {
+      get() {
+        return 'player-score' + this.id
+      }
+    },
+    elId_playerStatus: {
+      get() {
+        return 'player-status' + this.id
+      }
+    },
+    elId_playerCharacter: {
+      get() {
+        return 'player-character' + this.id
+      }
+    }
+  });
+
   players.push(player);
+
   const el = document.createElement('p');
-  el.id = 'player' + player.id;
-  el.classList.add('player');
+  el.id = player.elId_playerName;
+  el.classList.add('player-name');
   el.innerText = player.name;
 
   const innerEl = document.createElement('span');
-  innerEl.id = 'player-score' + player.id;
+  innerEl.id = player.elId_playerScore;
   innerEl.classList.add('player-score');
   innerEl.innerText = player.score;
   el.appendChild(innerEl);
 
   const statusEl = document.createElement('progress');
-  statusEl.id = 'player-status' + player.id;
+  statusEl.id = player.elId_playerStatus;
   statusEl.classList.add('player-status');
   statusEl.max = Object.keys(ACTIVE_PLAYER_STEPS).length - 1;
   statusEl.value = ACTIVE_PLAYER_STEPS.INACTIVE;
@@ -68,6 +95,11 @@ function nextPlayerStep() {
   }
 }
 
+function movePlayer(player, x, y){
+  player.x = x;
+  player.y = y;
+  movePlayerElement(player);
+}
 
 addPlayer('Ben');
 addPlayer('Sadaf');

@@ -12,3 +12,7 @@ utils.randomFrom = (enumList) => {
 utils.between =  (low, med, high) => {
   return low < med && med < high;
 }
+
+utils.randomizeArray = (arr) => {
+  return arr.sort((a, b) => 0.5 - Math.random());
+}

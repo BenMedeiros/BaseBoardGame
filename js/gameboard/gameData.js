@@ -10,7 +10,8 @@ const gameConfig = {
   // tileHeight: 8,
   numCols: 4,
   numRows: 4,
-  theme: null
+  theme: null,
+  playerCharacterScale: .8
 };
 
 Object.defineProperties(gameConfig, {
@@ -47,8 +48,9 @@ const gameState = {
 
 const ACTIVE_PLAYER_STEPS = {
   INACTIVE: 0,
-  INSERT_TILE : 1,
-  MOVE_CHARACTER: 2
+  INSERT_TILE: 1,
+  MOVE_CHARACTER: 2,
+  DONE: 3
 };
 
 const tempStates = {
@@ -86,7 +88,9 @@ function loadConfigFromStorage() {
 
   const savedConfig = JSON.parse(localStorage.getItem('gameConfig'));
   for (const [key] of Object.entries(gameConfig)) {
-    gameConfig[key] = savedConfig[key];
+    if (savedConfig[key] !== undefined && savedConfig[key] !== null) {
+      gameConfig[key] = savedConfig[key];
+    }
   }
 }
 
@@ -111,6 +115,7 @@ function readUiSettingsIntoConfig() {
   const formElement = document.getElementById('gameConfig');
   const formData = new FormData(formElement);
   for (const [key, value] of Object.entries(gameConfig)) {
+    if(formData.get(key) === null) continue;
     if (typeof (value) === 'number') {
       gameConfig[key] = Number(formData.get(key));
     } else if (typeof (value) === 'boolean') {

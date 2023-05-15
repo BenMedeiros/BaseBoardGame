@@ -24,10 +24,12 @@ i {
 }
 
 .tile {
-  top: 1rem;
-  left: 1rem;
-  width: 8rem;
-  height: 8rem;
+  /*set by js*/
+  /*top: 1rem;*/
+  /*left: 1rem;*/
+  /*width: 8rem;*/
+  /*height: 8rem;*/
+  padding: 0;
   /*background-color: darkseagreen;*/
   /*border-color: green;*/
   border-width: thick;
@@ -94,4 +96,8 @@ i {
 }
 .tile.unconnected-tiles {
   filter: brightness(50%);
+}
+
+.tile.character {
+  background-image: url(/img/gengar_action_figure.png);
 }

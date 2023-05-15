@@ -1,7 +1,27 @@
 'use strict';
 
-function getRandomTileType(){
-  return Object.keys(tileTypes)[  utils.randomInt(0, Object.keys(tileTypes).length -1)];
+function getRandomTileType() {
+  return Object.keys(tileTypes)[utils.randomInt(0, Object.keys(tileTypes).length - 1)];
+}
+
+
+function spawnPlayers() {
+  if (players.length > 4) throw new Error('4 players max, TODO add more spawn points');
+
+  const spawnPoints = utils.randomizeArray([
+    {x: 0, y: 0},
+    {x: 0, y: gameConfig.numRows - 1},
+    {x: gameConfig.numCols - 1, y: 0},
+    {x: gameConfig.numCols - 1, y: gameConfig.numRows - 1},
+  ]);
+
+  for (let i = 0; i < players.length; i++) {
+    createPlayerElement(players[i]);
+    movePlayer(players[i], -1, i);
+    setTimeout(() => {
+      movePlayer(players[i], spawnPoints[i].x, spawnPoints[i].y);
+    }, Math.random() * 2000);
+  }
 }
 
 //build board, populate tiles, and set the initial tile postitions
@@ -14,6 +34,8 @@ function rebuildBoard() {
   gameState.activeTileId = 0;
   gameState.activeTileIdHistory = [];
   gameState.disabledInsertId = null;
+
+  spawnPlayers();
 
   tiles.length = 0;
   tiles.push({id: 0, x: -1, y: -1, isActiveTile: true, rotation: 0, type: getRandomTileType()});

@@ -12,13 +12,9 @@
   user-select: none;
 }
 
-.player {
+.player-name {
   border: .1rem solid rgba(0, 0, 0, 0);
   padding: .5rem;
-}
-.active-player {
-  border: .1rem solid #8bb54a;
-  font-weight: bold;
 }
 
 .player-score {
@@ -28,4 +24,15 @@
 .player-status {
   /*noinspection CssInvalidPropertyValue*/
   inline-size: -webkit-fill-available;
+}
+
+.player-character {
+  position: absolute;
+  z-index: 30;
+  transition: left 1s, top 1s;
+}
+
+.active-player {
+  border: .1rem solid #8bb54a;
+  font-weight: bold;
 }

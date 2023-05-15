@@ -14,6 +14,32 @@ function clearGameboardElement() {
   }
 }
 
+function createPlayerElement(player) {
+  const el = document.createElement('img');
+  el.id = player.elId_playerCharacter;
+  el.classList.add('player-character');
+  el.src = player.icon;
+
+  //make character slightly smaller than tile
+  el.style.maxHeight = `${gameConfig.tileHeight * gameConfig.playerCharacterScale}rem`;
+  el.style.maxWidth = `${gameConfig.tileWidth * gameConfig.playerCharacterScale}rem`;
+  //offset player by the shrinkage to center them
+  el.style.paddingBlock = `${gameConfig.tileHeight * (1 - gameConfig.playerCharacterScale) / 2}rem`;
+  el.style.paddingInline = `${gameConfig.tileWidth * (1 - gameConfig.playerCharacterScale) / 2}rem`;
+  //player location
+  el.style.top = `${(player.y) * gameConfig.tileHeight}rem`;
+  el.style.left = `${player.x * gameConfig.tileWidth}rem`;
+
+  gameboardElement.appendChild(el);
+}
+
+// uses player x/y
+function movePlayerElement(player) {
+  const el = document.getElementById(player.elId_playerCharacter);
+  el.style.top = `${player.y * gameConfig.tileHeight}rem`;
+  el.style.left = `${player.x * gameConfig.tileWidth}rem`;
+}
+
 function updateTileElement(el, tile) {
   if (el === null) el = document.getElementById('tile' + tile.id);
   el.style.height = `${gameConfig.tileHeight}rem`;
