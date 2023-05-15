@@ -83,6 +83,14 @@ Object.defineProperties(gameState, {
       this.disabledInsertId = insert.id;
     }
   },
+  activePlayer: {
+    get() {
+      return players[this.activePlayerId];
+    },
+    set(player) {
+      this.activePlayerId = player.id;
+    }
+  }
 });
 
 

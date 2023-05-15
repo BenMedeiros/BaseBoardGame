@@ -16,6 +16,8 @@ form {
   z-index: 100;
   overflow: hidden;
   user-select: none;
+  /*can't transition height when its auto*/
+  transition: width .1s;
 }
 
 @media screen and (max-width: 600px) {
@@ -67,22 +69,10 @@ form input[type=submit]:hover {
 
 .collapsed {
   height: 3rem;
-  width: 10rem;
-  transition: height 1s, width .8s ease-in;
-
+  width: 8rem;
+  transition: width 1s 1.2s;
 }
 
-.expanded {
-  transition: height .4s, width .8s ease-in;
-
-  /*resize: both;*/
-  /*height: 25rem;*/
-  /*width: 15rem;*/
-  /*min-height: 25rem;*/
-  /*min-width: 15rem;*/
-  /*max-height: 90%;*/
-  /*max-width: 90%;*/
-}
 
 @media screen and (max-width: 600px) {
   .expanded {

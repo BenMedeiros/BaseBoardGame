@@ -16,7 +16,7 @@ function spawnPlayers() {
   ]);
 
   for (let i = 0; i < players.length; i++) {
-    createPlayerElement(players[i]);
+    createPlayerCharacterElement(players[i]);
     movePlayer(players[i], -1, i);
     setTimeout(() => {
       movePlayer(players[i], spawnPoints[i].x, spawnPoints[i].y);

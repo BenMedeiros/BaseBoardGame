@@ -17,7 +17,6 @@ function collapseSettingElement(event) {
     gameState.settingsExpanded = false;
     if (!gameConfigEl.classList.contains('collapsed')) {
       gameConfigEl.classList.add('collapsed');
-      gameConfigEl.classList.remove('expanded');
       addTempTransitionClass(gameConfigEl, 'collapsing');
     }
   }
@@ -31,7 +30,6 @@ function expandSettingElement(event) {
     gameState.settingsExpanded = true;
     if (gameConfigEl.classList.contains('collapsed')) {
       gameConfigEl.classList.remove('collapsed');
-      gameConfigEl.classList.add('expanded');
       addTempTransitionClass(gameConfigEl, 'expanding');
     }
   }
