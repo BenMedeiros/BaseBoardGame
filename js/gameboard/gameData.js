@@ -11,8 +11,11 @@ const gameConfig = {
   numCols: 4,
   numRows: 4,
   theme: null,
-  playerCharacterScale: .8
 };
+
+const gameConfigStatic = {
+  playerCharacterScale: .8,
+}
 
 Object.defineProperties(gameConfig, {
   numTiles: {
@@ -115,7 +118,7 @@ function readUiSettingsIntoConfig() {
   const formElement = document.getElementById('gameConfig');
   const formData = new FormData(formElement);
   for (const [key, value] of Object.entries(gameConfig)) {
-    if(formData.get(key) === null) continue;
+    if (formData.get(key) === null) continue;
     if (typeof (value) === 'number') {
       gameConfig[key] = Number(formData.get(key));
     } else if (typeof (value) === 'boolean') {

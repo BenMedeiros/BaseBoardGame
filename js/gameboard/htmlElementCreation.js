@@ -21,11 +21,11 @@ function createPlayerElement(player) {
   el.src = player.icon;
 
   //make character slightly smaller than tile
-  el.style.maxHeight = `${gameConfig.tileHeight * gameConfig.playerCharacterScale}rem`;
-  el.style.maxWidth = `${gameConfig.tileWidth * gameConfig.playerCharacterScale}rem`;
+  el.style.maxHeight = `${gameConfig.tileHeight * gameConfigStatic.playerCharacterScale}rem`;
+  el.style.maxWidth = `${gameConfig.tileWidth * gameConfigStatic.playerCharacterScale}rem`;
   //offset player by the shrinkage to center them
-  el.style.paddingBlock = `${gameConfig.tileHeight * (1 - gameConfig.playerCharacterScale) / 2}rem`;
-  el.style.paddingInline = `${gameConfig.tileWidth * (1 - gameConfig.playerCharacterScale) / 2}rem`;
+  el.style.paddingBlock = `${gameConfig.tileHeight * (1 - gameConfigStatic.playerCharacterScale) / 2}rem`;
+  el.style.paddingInline = `${gameConfig.tileWidth * (1 - gameConfigStatic.playerCharacterScale) / 2}rem`;
   //player location
   el.style.top = `${(player.y) * gameConfig.tileHeight}rem`;
   el.style.left = `${player.x * gameConfig.tileWidth}rem`;
