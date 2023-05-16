@@ -16,8 +16,8 @@ function clearGameboardElement() {
 
 function updateTileElement(el, tile) {
   if (el === null) el = document.getElementById('tile' + tile.id);
-  el.style.height = `${gameConfig.tileHeight}rem`;
-  el.style.width = `${gameConfig.tileWidth}rem`;
+  // el.style.height = `${gameConfig.tileHeight}rem`;
+  // el.style.width = `${gameConfig.tileWidth}rem`;
   el.style.top = `${tile.y * gameConfig.tileHeight}rem`;
   el.style.left = `${tile.x * gameConfig.tileWidth}rem`;
 

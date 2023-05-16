@@ -6,7 +6,7 @@ const inserts = []
 const gameConfig = {
   playerName: null,
   animateStart: false,
-  tileWidth: 8,
+  _tileWidth: 8,
   // tileHeight: 8,
   numCols: 4,
   numRows: 4,
@@ -18,9 +18,15 @@ const gameConfigStatic = {
 }
 
 Object.defineProperties(gameConfig, {
-  numTiles: {
+  tileWidth: {
+    enumerable: true,
     get() {
-      return (this.numRows * this.numCols) + 1
+      return this._tileWidth
+    },
+    set(width) {
+      this._tileWidth = width;
+      document.documentElement.style.setProperty('--tileWidth', width+'rem');
+      document.documentElement.style.setProperty('--tileHeight', width+'rem');
     }
   },
   tileHeight: {
@@ -28,6 +34,12 @@ Object.defineProperties(gameConfig, {
       return this.tileWidth
     }
   },
+  numTiles: {
+    get() {
+      return (this.numRows * this.numCols) + 1
+    }
+  },
+
   boardWidth: {
     get() {
       return this.tileWidth * this.numCols

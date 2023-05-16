@@ -12,7 +12,10 @@ function addPlayer(name, imageFilter) {
     iconFilter: imageFilter,
     gamepieceFilter: imageFilter,
     x: -1,
-    y: -1
+    y: -1,
+    //null - not shared, else what position they occupy on the tile
+    sharedTilePosition: 0,
+    sharedTiles: 0
   };
   Object.defineProperties(player, {
     elId_playerName: {
@@ -77,14 +80,32 @@ function nextPlayerStep() {
 function movePlayer(player, x, y) {
   player.x = x;
   player.y = y;
+
+  const xyPlayerMap = {};
+  for (const plyr of players) {
+    const key = `(${plyr.x},${plyr.y})`;
+    if (!xyPlayerMap[key]) xyPlayerMap[key] = []
+    xyPlayerMap[key].push(plyr);
+  }
+  //note if any x/y aka tiles are shared
+  for (const sharedTilePlayersArray of Object.values(xyPlayerMap)) {
+    for (let i = 0; i < sharedTilePlayersArray.length; i++) {
+      const pl = sharedTilePlayersArray[i];
+      //one player moves at a time, so the count would change for anyone affected
+      if(pl.sharedTiles !== sharedTilePlayersArray.length) {
+        pl.sharedTilePosition = i;
+        pl.sharedTiles = sharedTilePlayersArray.length;
+        updatePlayerCharacterElementOffset(pl)
+      }
+    }
+  }
+
   movePlayerCharacterElement(player);
 }
 
 function movePlayerBy(player, x, y) {
   if (areTilesConnectedAdjacent(getTileByXY(player.x, player.y), getTileByXY(player.x + x, player.y + y))) {
-    player.x += x;
-    player.y += y;
-    movePlayerCharacterElement(player);
+    movePlayer(player, player.x + x, player.y + y);
   } else {
     console.log('tiles not connected');
   }
@@ -93,6 +114,8 @@ function movePlayerBy(player, x, y) {
 addPlayer('Ben', null);
 addPlayer('Sadaf', 'hue-rotate(110deg) saturate(1.3)');
 addPlayer('player 3', 'hue-rotate(210deg)');
+addPlayer('Frank', 'hue-rotate(40deg)');
+
 setPlayerActive(players[utils.randomInt(0, players.length - 1)]);
 
 document.addEventListener('insert-clicked-success', nextPlayerStep);

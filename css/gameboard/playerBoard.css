@@ -2,7 +2,10 @@
   --iconFilter: null;
   --gamepieceFilter: null;
   --color-backdrop: #8bb54a;
-  filter: ;
+  --player-character-scale: .7;
+  --player-character-offset: calc(1 - var(--player-character-scale)) / 2;
+  --player-character-x: -1;
+  --player-character-y: -1;
 }
 
 #scoreboard {
@@ -24,6 +27,7 @@
   padding: .5rem;
   display: block;
 }
+
 .player-box.active {
   border: .1rem solid var(--color-backdrop);
   font-weight: bold;
@@ -37,6 +41,7 @@
   transition: transform 1s;
   filter: var(--iconFilter);
 }
+
 .player-icon.active {
   transform: scale(1.5) translateX(.2rem);
 }
@@ -61,11 +66,17 @@
 .player-character {
   position: absolute;
   z-index: 30;
-  transition: left 1s, top 1s, transform 2s;
+  left: calc(calc(var(--player-character-x) + var(--player-character-offset)) * var(--tileWidth));
+  top: calc(calc(var(--player-character-y) + var(--player-character-offset)) * var(--tileHeight));
+  max-height: calc(var(--player-character-scale) * var(--tileHeight));
+  max-width: calc(var(--player-character-scale) * var(--tileWidth));
+  transition: left 1s, top 1s, transform 2s, translate 1s;
   filter: var(--gamepieceFilter);
 }
+
 .player-character.active {
   filter: var(--gamepieceFilter) drop-shadow(2px 4px 6px black);
   transform: scale(1.5);
+  z-index: 31;
 }
 

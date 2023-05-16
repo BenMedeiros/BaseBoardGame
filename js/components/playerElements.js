@@ -13,21 +13,37 @@ function createPlayerCharacterElement(player) {
   el.classList.add('player-character');
   el.style.setProperty('--gamepieceFilter', player.gamepieceFilter);
   el.src = player.gamepiece;
-
-  //make character slightly smaller than tile
-  el.style.maxHeight = `${gameConfig.tileHeight * gameConfigStatic.playerCharacterScale}rem`;
-  el.style.maxWidth = `${gameConfig.tileWidth * gameConfigStatic.playerCharacterScale}rem`;
   gameboardElement.appendChild(el);
 }
 
 // uses player x/y
 function movePlayerCharacterElement(player) {
   const el = document.getElementById(player.elId_playerCharacter);
-  const topOffset = (1 - gameConfigStatic.playerCharacterScale) / 2;
-  const leftOffset = (1 - gameConfigStatic.playerCharacterScale) / 2;
+  // const topOffset = (1 - gameConfigStatic.playerCharacterScale) / 2;
+  // const leftOffset = (1 - gameConfigStatic.playerCharacterScale) / 2;
   //player location
-  el.style.top = `${(player.y + topOffset) * gameConfig.tileHeight}rem`;
-  el.style.left = `${(player.x + leftOffset) * gameConfig.tileWidth}rem`;
+  // el.style.top = `${(player.y + topOffset) * gameConfig.tileHeight}rem`;
+  // el.style.left = `${(player.x + leftOffset) * gameConfig.tileWidth}rem`;
+  el.style.setProperty('--player-character-x', player.x);
+  el.style.setProperty('--player-character-y', player.y);
+}
+
+//  update when players move on/off the same tile
+function updatePlayerCharacterElementOffset(player) {
+  const el = document.getElementById(player.elId_playerCharacter);
+  if (!el) return;
+  switch (player.sharedTiles) {
+    case 3:
+    case 4:
+      el.style.translate = (player.sharedTilePosition % 2 - .5) * 2.5 + 'rem'
+        + ' ' + (Math.floor(player.sharedTilePosition / 2) - .5) * 2.5 + 'rem';
+      break;
+    case 2:
+      el.style.translate = (player.sharedTilePosition % 2 - .5) * 2.5 + 'rem';
+      break;
+    default:
+      el.style.translate = '0';
+  }
 }
 
 function createPlayerElement(player) {

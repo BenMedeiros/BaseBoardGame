@@ -1,3 +1,8 @@
+:root {
+  --tileHeight: 8rem;
+  --tileWidth: 8rem;
+}
+
 body {
   background-color: #6A6A6A;
 }
@@ -27,8 +32,8 @@ i {
   /*set by js*/
   /*top: 1rem;*/
   /*left: 1rem;*/
-  /*width: 8rem;*/
-  /*height: 8rem;*/
+  width: var(--tileWidth);
+  height: var(--tileHeight);
   padding: 0;
   /*background-color: darkseagreen;*/
   /*border-color: green;*/
