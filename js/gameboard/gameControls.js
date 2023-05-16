@@ -35,7 +35,6 @@ function controllerMoveTile(e) {
           gameState.activeTile.y, 1000);
       }
       break;
-
     case 'KeyQ':
     case 'Comma':
       rotateTileBy(gameState.activeTile, -90);
@@ -51,7 +50,27 @@ function controllerMoveTile(e) {
 }
 
 function controllerMoveCharacter(e) {
-
+  switch (e.code) {
+    case 'ArrowUp':
+    case 'KeyW':
+      movePlayerBy(gameState.activePlayer, 0, -1);
+      break;
+    case 'ArrowDown':
+    case 'KeyS':
+      movePlayerBy(gameState.activePlayer, 0, 1);
+      break;
+    case 'ArrowLeft':
+    case 'KeyA':
+      movePlayerBy(gameState.activePlayer, -1, 0);
+      break;
+    case 'ArrowRight':
+    case 'KeyD':
+      movePlayerBy(gameState.activePlayer, 1, 0);
+      break;
+    case 'Space':
+      nextPlayerStep();
+      break;
+  }
 }
 
 

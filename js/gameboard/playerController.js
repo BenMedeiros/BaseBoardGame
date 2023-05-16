@@ -2,13 +2,15 @@
 
 const players = [];
 
-function addPlayer(name) {
+function addPlayer(name, imageFilter) {
   const player = {
     id: players.length,
     name,
     score: 0,
     icon: '/img/gengar_action_figure.png',
-    gamepiece : '/img/gengar_action_figure.png',
+    gamepiece: '/img/gengar_action_figure.png',
+    iconFilter: imageFilter,
+    gamepieceFilter: imageFilter,
     x: -1,
     y: -1
   };
@@ -49,10 +51,8 @@ function setPlayerActive(player) {
   const oldActivePlayer = gameState.activePlayer;
   gameState.activePlayerId = player.id;
   gameState.activePlayerStep = ACTIVE_PLAYER_STEPS.INSERT_TILE;
-  if(oldActivePlayer && player.id !== oldActivePlayer.id) updatePlayerStatusElements(oldActivePlayer);
+  if (oldActivePlayer && player.id !== oldActivePlayer.id) updatePlayerStatusElements(oldActivePlayer);
   updatePlayerStatusElements(player);
-
- console.log('setplayeractive');
   enableTempDisabledInserts();
 }
 
@@ -61,10 +61,14 @@ function setNextPlayerActive() {
 }
 
 function nextPlayerStep() {
-  if (gameState.activePlayerStep === Object.keys(ACTIVE_PLAYER_STEPS).length - 1) {
+  gameState.activePlayerStep++;
+  //completed all steps, next player
+  if (gameState.activePlayerStep === Object.keys(ACTIVE_PLAYER_STEPS).length) {
     setNextPlayerActive();
+    //  last step just in case i want a hook later
+  } else if (gameState.activePlayerStep === ACTIVE_PLAYER_STEPS.DONE) {
+    nextPlayerStep();
   } else {
-    gameState.activePlayerStep++;
     updatePlayerStatusElements(gameState.activePlayer);
     tempDisableAllInserts();
   }
@@ -73,12 +77,22 @@ function nextPlayerStep() {
 function movePlayer(player, x, y) {
   player.x = x;
   player.y = y;
-  movePlayerElement(player);
+  movePlayerCharacterElement(player);
 }
 
-addPlayer('Ben');
-addPlayer('Sadaf');
-addPlayer('player 3');
+function movePlayerBy(player, x, y) {
+  if (areTilesConnectedAdjacent(getTileByXY(player.x, player.y), getTileByXY(player.x + x, player.y + y))) {
+    player.x += x;
+    player.y += y;
+    movePlayerCharacterElement(player);
+  } else {
+    console.log('tiles not connected');
+  }
+}
+
+addPlayer('Ben', null);
+addPlayer('Sadaf', 'hue-rotate(110deg) saturate(1.3)');
+addPlayer('player 3', 'hue-rotate(210deg)');
 setPlayerActive(players[utils.randomInt(0, players.length - 1)]);
 
 document.addEventListener('insert-clicked-success', nextPlayerStep);

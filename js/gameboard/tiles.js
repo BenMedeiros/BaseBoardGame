@@ -20,6 +20,8 @@ const tilePaths = {
 
 //return true if tiles are connected accounting for type/rotation
 function areTilesConnectedAdjacent(tile1, tile2) {
+  if(!tile1 || !tile2) return false;
+
   const xDistance = tile1.x - tile2.x;
   const yDistance = tile1.y - tile2.y;
 
@@ -98,5 +100,11 @@ function removeConnectedTilesHighlights() {
     const el = document.getElementById('tile' + tile.id);
     el.classList.remove('unconnected-tiles');
     el.classList.remove('connected-tiles');
+  }
+}
+
+function getTileByXY(x, y){
+  for (const tile of tiles) {
+    if(tile.x === x && tile.y === y) return tile;
   }
 }

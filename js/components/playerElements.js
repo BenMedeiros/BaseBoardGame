@@ -11,26 +11,23 @@ function createPlayerCharacterElement(player) {
   const el = document.createElement('img');
   el.id = player.elId_playerCharacter;
   el.classList.add('player-character');
+  el.style.setProperty('--gamepieceFilter', player.gamepieceFilter);
   el.src = player.gamepiece;
 
   //make character slightly smaller than tile
   el.style.maxHeight = `${gameConfig.tileHeight * gameConfigStatic.playerCharacterScale}rem`;
   el.style.maxWidth = `${gameConfig.tileWidth * gameConfigStatic.playerCharacterScale}rem`;
-  //offset player by the shrinkage to center them
-  el.style.paddingBlock = `${gameConfig.tileHeight * (1 - gameConfigStatic.playerCharacterScale) / 2}rem`;
-  el.style.paddingInline = `${gameConfig.tileWidth * (1 - gameConfigStatic.playerCharacterScale) / 2}rem`;
-  //player location
-  el.style.top = `${(player.y) * gameConfig.tileHeight}rem`;
-  el.style.left = `${player.x * gameConfig.tileWidth}rem`;
-
   gameboardElement.appendChild(el);
 }
 
 // uses player x/y
-function movePlayerElement(player) {
+function movePlayerCharacterElement(player) {
   const el = document.getElementById(player.elId_playerCharacter);
-  el.style.top = `${player.y * gameConfig.tileHeight}rem`;
-  el.style.left = `${player.x * gameConfig.tileWidth}rem`;
+  const topOffset = (1 - gameConfigStatic.playerCharacterScale) / 2;
+  const leftOffset = (1 - gameConfigStatic.playerCharacterScale) / 2;
+  //player location
+  el.style.top = `${(player.y + topOffset) * gameConfig.tileHeight}rem`;
+  el.style.left = `${(player.x + leftOffset) * gameConfig.tileWidth}rem`;
 }
 
 function createPlayerElement(player) {
@@ -57,6 +54,7 @@ function createPlayerElement(player) {
   iconEl.id = player.elId_playerIcon;
   iconEl.classList.add('player-icon');
   iconEl.src = player.icon;
+  iconEl.style.setProperty('--iconFilter', player.iconFilter);
 
   playerBox.appendChild(iconEl);
   playerBox.appendChild(nameEl);
@@ -68,15 +66,21 @@ function createPlayerElement(player) {
 }
 
 function updatePlayerStatusElements(player) {
-  if(!player) return;
+  if (!player) return;
+  const playerCharacterEl = document.getElementById(player.elId_playerCharacter);
   const playerStatusEl = document.getElementById(player.elId_playerStatus);
-  const playerBoxEl = playerStatusEl.parentElement.parentElement;
+  const playerIconEl = document.getElementById(player.elId_playerIcon);
+  const playerBoxEl = playerIconEl.parentElement;
 
   if (gameState.activePlayerId === player.id) {
     playerStatusEl.value = gameState.activePlayerStep;
-    playerBoxEl.classList.add('active-player');
+    playerBoxEl.classList.add('active');
+    playerIconEl.classList.add('active');
+    if (playerCharacterEl) playerCharacterEl.classList.add('active');
   } else {
     playerStatusEl.value = ACTIVE_PLAYER_STEPS.INACTIVE;
-    playerBoxEl.classList.remove('active-player');
+    playerBoxEl.classList.remove('active');
+    playerIconEl.classList.remove('active');
+    if (playerCharacterEl) playerCharacterEl.classList.remove('active');
   }
 }

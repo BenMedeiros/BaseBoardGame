@@ -14,7 +14,7 @@ const gameConfig = {
 };
 
 const gameConfigStatic = {
-  playerCharacterScale: .8,
+  playerCharacterScale: .7,
 }
 
 Object.defineProperties(gameConfig, {

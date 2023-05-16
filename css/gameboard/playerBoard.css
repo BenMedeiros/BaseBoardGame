@@ -1,3 +1,10 @@
+:root {
+  --iconFilter: null;
+  --gamepieceFilter: null;
+  --color-backdrop: #8bb54a;
+  filter: ;
+}
+
 #scoreboard {
   background-color: #2f3032;
   color: white;
@@ -17,11 +24,21 @@
   padding: .5rem;
   display: block;
 }
+.player-box.active {
+  border: .1rem solid var(--color-backdrop);
+  font-weight: bold;
+}
 
 .player-icon {
   max-height: 2.5rem;
   max-width: 2.5rem;
-  padding-right: .6rem;
+  padding-right: .7rem;
+  padding-left: .3rem;
+  transition: transform 1s;
+  filter: var(--iconFilter);
+}
+.player-icon.active {
+  transform: scale(1.5) translateX(.2rem);
 }
 
 .player-name {
@@ -44,10 +61,11 @@
 .player-character {
   position: absolute;
   z-index: 30;
-  transition: left 1s, top 1s;
+  transition: left 1s, top 1s, transform 2s;
+  filter: var(--gamepieceFilter);
+}
+.player-character.active {
+  filter: var(--gamepieceFilter) drop-shadow(2px 4px 6px black);
+  transform: scale(1.5);
 }
 
-.active-player {
-  border: .1rem solid #8bb54a;
-  font-weight: bold;
-}
