@@ -8,16 +8,16 @@ const gameConfig = {
   animateStart: false,
   // _tileWidth: 8,
   // tileHeight: 8,
-  numCols: 4,
-  numRows: 4,
+  // numCols: 4,
+  // numRows: 4,
   theme: null,
 };
 
 Object.defineProperties(gameConfig, {
-  _tileWidth : {
+  _tileWidth: {
     value: 8,
     writable: true,
-    enumerable: false
+    enumerable: false,
   },
   tileWidth: {
     enumerable: true,
@@ -35,12 +35,41 @@ Object.defineProperties(gameConfig, {
       return this.tileWidth
     }
   },
+  _numCols: {
+    value: 4,
+    writable: true,
+    enumerable: false,
+  },
+  numCols: {
+    enumerable: true,
+    get() {
+      return this._numCols
+    },
+    set(num) {
+      this._numCols = num;
+      document.documentElement.style.setProperty('--num-cols', num);
+    }
+  },
+  _numRows : {
+    value: 4,
+    writable: true,
+    enumerable: false,
+  },
+  numRows: {
+    enumerable: true,
+    get() {
+      return this._numRows
+    },
+    set(num) {
+      this._numRows = num;
+      document.documentElement.style.setProperty('--num-rows', num);
+    }
+  },
   numTiles: {
     get() {
       return (this.numRows * this.numCols) + 1
     }
   },
-
   boardWidth: {
     get() {
       return this.tileWidth * this.numCols
@@ -99,7 +128,7 @@ Object.defineProperties(gameState, {
   },
   activePlayerStep: {
     get() {
-      if(this.activePlayer) return this.activePlayer.playerStep;
+      if (this.activePlayer) return this.activePlayer.playerStep;
     },
     set(playerStep) {
       this.activePlayer.playerStep = playerStep;
@@ -142,6 +171,7 @@ function readUiSettingsIntoConfig() {
   const formElement = document.getElementById('gameConfig');
   const formData = new FormData(formElement);
   for (const [key, value] of Object.entries(gameConfig)) {
+    console.log(key, value, formData.get(key));
     if (formData.get(key) === null) continue;
     if (typeof (value) === 'number') {
       gameConfig[key] = Number(formData.get(key));

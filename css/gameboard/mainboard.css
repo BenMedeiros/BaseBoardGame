@@ -1,6 +1,8 @@
 :root {
   --tileHeight: 8rem;
   --tileWidth: 8rem;
+  --num-cols: 4;
+  --num-rows: 4;
 }
 
 body {
@@ -14,14 +16,15 @@ i {
 .gameboard {
   background-color: #D9D3BF;
   border-color: #8BB54A;
-  border-width: 2rem;
+  border-width: calc(var(--tileWidth) * 1.3);
   border-style: double;
   /*centers when position:absolute*/
   position: absolute;
   /*put the game board slightly lower for header bar*/
   /*give room on right side for scoreboard*/
   margin: 5rem 15rem auto auto;
-  /*height: calc(var(--));*/
+  height: calc(var(--num-rows) * var(--tileHeight));
+  width: calc(var(--num-cols) * var(--tileWidth));
   left: 0;
   right: 0;
   bottom: 0;

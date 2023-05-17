@@ -29,7 +29,6 @@ function spawnPlayers() {
 function rebuildBoard() {
   console.log('rebuildBoard');
   clearGameboardElement();
-  updateGameboardElement();
 
   gameState.settingsExpanded = true;
   gameState.activeTileId = 0;

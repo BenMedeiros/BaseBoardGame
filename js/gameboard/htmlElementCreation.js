@@ -2,12 +2,6 @@
 
 const gameboardElement = document.getElementById("gameboard");
 
-function updateGameboardElement() {
-  gameboardElement.style.width = gameConfig.boardWidth + 'rem';
-  gameboardElement.style.height = gameConfig.boardHeight + 'rem';
-  gameboardElement.style.borderWidth = (gameConfig.tileWidth * 1.3) + 'rem';
-}
-
 function clearGameboardElement() {
   while (gameboardElement.hasChildNodes()) {
     gameboardElement.removeChild(gameboardElement.firstChild)
