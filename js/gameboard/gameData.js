@@ -6,7 +6,7 @@ const inserts = []
 const gameConfig = {
   playerName: null,
   animateStart: false,
-  _tileWidth: 8,
+  // _tileWidth: 8,
   // tileHeight: 8,
   numCols: 4,
   numRows: 4,
@@ -14,6 +14,11 @@ const gameConfig = {
 };
 
 Object.defineProperties(gameConfig, {
+  _tileWidth : {
+    value: 8,
+    writable: true,
+    enumerable: false
+  },
   tileWidth: {
     enumerable: true,
     get() {

@@ -2,12 +2,20 @@
 
 const players = [];
 
-const ACTIVE_PLAYER_STEPS = Object.seal({
+const ACTIVE_PLAYER_STEPS = {
   INACTIVE: 0,
   INSERT_TILE: 1,
   MOVE_CHARACTER: 2,
-  DONE: 3
-});
+  DONE: 3,
+  getStringOf: (ind) => {
+    for (const [stepString, stepValue] of Object.entries(ACTIVE_PLAYER_STEPS)) {
+      if (stepValue === ind) return stepString;
+    }
+  }
+};
+
+Object.defineProperty(ACTIVE_PLAYER_STEPS,'getStringOf',{enumerable:false});
+Object.seal(ACTIVE_PLAYER_STEPS);
 
 function addPlayer(name, imageFilter) {
   const player = {
@@ -26,13 +34,6 @@ function addPlayer(name, imageFilter) {
     playerStep : 0
   };
   Object.defineProperties(player, {
-    playerStep_string : {
-      get() {
-        for (const [stepString, stepValue] of Object.entries(ACTIVE_PLAYER_STEPS)) {
-          if (stepValue === this.playerStep) return stepString;
-        }
-      }
-    },
     elId_playerName: {
       get() {
         return 'player-name' + this.id

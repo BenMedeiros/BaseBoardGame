@@ -74,7 +74,7 @@ function createPlayerElement(player) {
   const msgEl = document.createElement('span');
   msgEl.id = player.elId_playerMessage;
   msgEl.classList.add('player-message');
-  msgEl.innerText = player.playerStep_string;
+  msgEl.innerText = ACTIVE_PLAYER_STEPS.getStringOf(player.playerStep);
   nameEl.appendChild(msgEl);
 
   document.getElementById('scoreboard').appendChild(playerBox);
@@ -82,7 +82,6 @@ function createPlayerElement(player) {
 }
 
 function updatePlayerStatusElements(player) {
-  console.log('updating status els ', player.name, player.playerStep_string);
   if (!player) return;
   const playerCharacterEl = document.getElementById(player.elId_playerCharacter);
   const playerStatusEl = document.getElementById(player.elId_playerStatus);
@@ -91,7 +90,7 @@ function updatePlayerStatusElements(player) {
   const playerBoxEl = playerIconEl.parentElement;
 
   playerStatusEl.value = player.playerStep;
-  playerMsgEl.innerText = player.playerStep_string;
+  playerMsgEl.innerText = ACTIVE_PLAYER_STEPS.getStringOf(player.playerStep);
   if (gameState.activePlayerId === player.id) {
     playerBoxEl.classList.add('active');
     playerIconEl.classList.add('active');
