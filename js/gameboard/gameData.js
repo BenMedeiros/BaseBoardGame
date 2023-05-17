@@ -13,10 +13,6 @@ const gameConfig = {
   theme: null,
 };
 
-const gameConfigStatic = {
-  playerCharacterScale: .7,
-}
-
 Object.defineProperties(gameConfig, {
   tileWidth: {
     enumerable: true,
@@ -25,8 +21,8 @@ Object.defineProperties(gameConfig, {
     },
     set(width) {
       this._tileWidth = width;
-      document.documentElement.style.setProperty('--tileWidth', width+'rem');
-      document.documentElement.style.setProperty('--tileHeight', width+'rem');
+      document.documentElement.style.setProperty('--tileWidth', width + 'rem');
+      document.documentElement.style.setProperty('--tileHeight', width + 'rem');
     }
   },
   tileHeight: {
@@ -52,25 +48,18 @@ Object.defineProperties(gameConfig, {
   }
 });
 
+
+const tempStates = {
+  insertsTempDisabledTimeoutId: null
+}
+
 const gameState = {
   settingsExpanded: true,
   activeTileId: 0,
   activeTileIdHistory: [],
   disabledInsertId: null,
-  activePlayerId: null,
-  activePlayerStep: 0
-}
-
-const ACTIVE_PLAYER_STEPS = {
-  INACTIVE: 0,
-  INSERT_TILE: 1,
-  MOVE_CHARACTER: 2,
-  DONE: 3
+  activePlayerId: null
 };
-
-const tempStates = {
-  insertsTempDisabledTimeoutId: null
-}
 
 Object.defineProperties(gameState, {
   activeTile: {
@@ -102,9 +91,19 @@ Object.defineProperties(gameState, {
     set(player) {
       this.activePlayerId = player.id;
     }
+  },
+  activePlayerStep: {
+    get() {
+      if(this.activePlayer) return this.activePlayer.playerStep;
+    },
+    set(playerStep) {
+      this.activePlayer.playerStep = playerStep;
+    }
   }
 });
 
+Object.seal(gameState);
+Object.seal(gameConfig);
 
 function loadConfigFromStorage() {
   if (!localStorage.getItem('gameConfig')) saveConfigToStorage();

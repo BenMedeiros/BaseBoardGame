@@ -21,6 +21,8 @@ const tilePaths = {
 //return true if tiles are connected accounting for type/rotation
 function areTilesConnectedAdjacent(tile1, tile2) {
   if(!tile1 || !tile2) return false;
+  //active tiles may be adjacent but are not connected for moving
+  if(tile1.isActiveTile || tile2.isActiveTile) return false;
 
   const xDistance = tile1.x - tile2.x;
   const yDistance = tile1.y - tile2.y;

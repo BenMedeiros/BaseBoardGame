@@ -2,22 +2,37 @@
 
 const players = [];
 
+const ACTIVE_PLAYER_STEPS = Object.seal({
+  INACTIVE: 0,
+  INSERT_TILE: 1,
+  MOVE_CHARACTER: 2,
+  DONE: 3
+});
+
 function addPlayer(name, imageFilter) {
   const player = {
     id: players.length,
     name,
     score: 0,
-    icon: '/img/gengar_action_figure.png',
-    gamepiece: '/img/gengar_action_figure.png',
+    icon: 'img/gengar_action_figure.png',
+    gamepiece: 'img/gengar_action_figure.png',
     iconFilter: imageFilter,
     gamepieceFilter: imageFilter,
     x: -1,
     y: -1,
     //null - not shared, else what position they occupy on the tile
     sharedTilePosition: 0,
-    sharedTiles: 0
+    sharedTiles: 0,
+    playerStep : 0
   };
   Object.defineProperties(player, {
+    playerStep_string : {
+      get() {
+        for (const [stepString, stepValue] of Object.entries(ACTIVE_PLAYER_STEPS)) {
+          if (stepValue === this.playerStep) return stepString;
+        }
+      }
+    },
     elId_playerName: {
       get() {
         return 'player-name' + this.id
@@ -31,6 +46,11 @@ function addPlayer(name, imageFilter) {
     elId_playerStatus: {
       get() {
         return 'player-status' + this.id
+      }
+    },
+    elId_playerMessage: {
+      get() {
+        return 'player-message' + this.id
       }
     },
     elId_playerCharacter: {
@@ -47,14 +67,17 @@ function addPlayer(name, imageFilter) {
 
   players.push(player);
   createPlayerElement(player);
-  return player;
+  return Object.seal(player);
 }
 
 function setPlayerActive(player) {
   const oldActivePlayer = gameState.activePlayer;
-  gameState.activePlayerId = player.id;
-  gameState.activePlayerStep = ACTIVE_PLAYER_STEPS.INSERT_TILE;
-  if (oldActivePlayer && player.id !== oldActivePlayer.id) updatePlayerStatusElements(oldActivePlayer);
+  gameState.activePlayer = player;
+  if(oldActivePlayer && player.id !== oldActivePlayer.id){
+    oldActivePlayer.playerStep = ACTIVE_PLAYER_STEPS.INACTIVE;
+    updatePlayerStatusElements(oldActivePlayer);
+  }
+  player.playerStep = ACTIVE_PLAYER_STEPS.INSERT_TILE;
   updatePlayerStatusElements(player);
   enableTempDisabledInserts();
 }
@@ -67,10 +90,11 @@ function nextPlayerStep() {
   gameState.activePlayerStep++;
   //completed all steps, next player
   if (gameState.activePlayerStep === Object.keys(ACTIVE_PLAYER_STEPS).length) {
-    setNextPlayerActive();
+    setNextPlayerActive()
     //  last step just in case i want a hook later
   } else if (gameState.activePlayerStep === ACTIVE_PLAYER_STEPS.DONE) {
-    nextPlayerStep();
+    updatePlayerStatusElements(gameState.activePlayer);
+    setTimeout(nextPlayerStep, 1000);
   } else {
     updatePlayerStatusElements(gameState.activePlayer);
     tempDisableAllInserts();

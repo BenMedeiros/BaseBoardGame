@@ -24,7 +24,7 @@
 
 .player-box {
   border: .1rem solid rgba(0, 0, 0, 0);
-  padding: .5rem;
+  padding-inline: .5rem;
   display: block;
 }
 
@@ -61,6 +61,15 @@
 .player-status {
   /*noinspection CssInvalidPropertyValue*/
   inline-size: -webkit-fill-available;
+  vertical-align: middle;
+}
+
+.player-message {
+  font-size: .8rem;
+  font-stretch: condensed;
+  font-weight: lighter;
+  color: #888888;
+  vertical-align: top;
 }
 
 .player-character {
@@ -76,7 +85,7 @@
 
 .player-character.active {
   filter: var(--gamepieceFilter) drop-shadow(2px 4px 6px black);
-  transform: scale(1.5);
+  transform: scale(1.3);
   z-index: 31;
 }
 
