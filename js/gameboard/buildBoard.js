@@ -83,6 +83,8 @@ function rebuildBoard() {
 
   createTileElements(tiles);
   createInsertElements(inserts);
+
+  setTimeout(setNextPlayerActive, 1000);
 }
 
 

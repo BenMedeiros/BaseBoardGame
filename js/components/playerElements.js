@@ -14,6 +14,7 @@ function createPlayerCharacterElement(player) {
   el.style.setProperty('--gamepieceFilter', player.gamepieceFilter);
   el.src = player.gamepiece;
   gameboardElement.appendChild(el);
+  console.log('character el created ', player.id, player.name);
 }
 
 // uses player x/y
@@ -44,6 +45,7 @@ function updatePlayerCharacterElementOffset(player) {
 function createPlayerElement(player) {
   const playerBox = document.createElement('span');
   playerBox.classList.add('player-box');
+  playerBox.id = player.elId_playerBox;
 
   const iconEl = document.createElement('img');
   iconEl.id = player.elId_playerIcon;
@@ -85,19 +87,21 @@ function updatePlayerStatusElements(player) {
   if (!player) return;
   const playerCharacterEl = document.getElementById(player.elId_playerCharacter);
   const playerStatusEl = document.getElementById(player.elId_playerStatus);
-  const playerIconEl = document.getElementById(player.elId_playerIcon);
   const playerMsgEl = document.getElementById(player.elId_playerMessage);
-  const playerBoxEl = playerIconEl.parentElement;
+  const playerBoxEl = document.getElementById(player.elId_playerBox);
 
   playerStatusEl.value = player.playerStep;
   playerMsgEl.innerText = ACTIVE_PLAYER_STEPS.getStringOf(player.playerStep);
   if (gameState.activePlayerId === player.id) {
     playerBoxEl.classList.add('active');
-    playerIconEl.classList.add('active');
-    if (playerCharacterEl) playerCharacterEl.classList.add('active');
+    playerCharacterEl.style.setProperty('--is-active-player', '1');
+
+    playerBoxEl.style.setProperty('--is-active-player', '1');
+
   } else {
     playerBoxEl.classList.remove('active');
-    playerIconEl.classList.remove('active');
-    if (playerCharacterEl) playerCharacterEl.classList.remove('active');
+    playerBoxEl.style.removeProperty('--is-active-player');
+    playerCharacterEl.style.removeProperty('--is-active-player');
+
   }
 }

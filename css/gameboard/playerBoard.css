@@ -6,6 +6,7 @@
   --player-character-offset: calc(1 - var(--player-character-scale)) / 2;
   --player-character-x: -1;
   --player-character-y: -1;
+  --is-active-player: 0;
 }
 
 #scoreboard {
@@ -40,10 +41,7 @@
   padding-left: .3rem;
   transition: transform 1s;
   filter: var(--iconFilter);
-}
-
-.player-icon.active {
-  transform: scale(1.5) translateX(.2rem);
+  transform: scale(calc(1 + (.5 * var(--is-active-player)))) translateX(calc(.2rem * var(--is-active-player)));
 }
 
 .player-name {
@@ -74,18 +72,14 @@
 
 .player-character {
   position: absolute;
-  z-index: 30;
+  transform: scale(calc(1 + (.3 * var(--is-active-player))));
+  z-index: calc(30 + var(--is-active-player));
   left: calc((var(--player-character-x) + var(--player-character-offset)) * var(--tileWidth));
   top: calc((var(--player-character-y) + var(--player-character-offset)) * var(--tileHeight));
   max-height: calc(var(--player-character-scale) * var(--tileHeight));
   max-width: calc(var(--player-character-scale) * var(--tileWidth));
   transition: left 1s, top 1s, transform 2s, translate 1s;
-  filter: var(--gamepieceFilter);
+  filter: var(--gamepieceFilter) drop-shadow(calc(2px * var(--is-active-player)) calc(4px * var(--is-active-player)) calc(6px * var(--is-active-player)) black);
 }
 
-.player-character.active {
-  filter: var(--gamepieceFilter) drop-shadow(2px 4px 6px black);
-  transform: scale(1.3);
-  z-index: 31;
-}
 

@@ -3,6 +3,9 @@
   --tileWidth: 8rem;
   --num-cols: 4;
   --num-rows: 4;
+  /*tile x/y are set per tile*/
+  --tile-x: 0;
+  --tile-y: 0
 }
 
 body {
@@ -34,8 +37,8 @@ i {
 
 .tile {
   /*set by js*/
-  /*top: 1rem;*/
-  /*left: 1rem;*/
+  top: calc(var(--tileHeight) * var(--tile-y));
+  left: calc(var(--tileWidth) * var(--tile-x));
   width: var(--tileWidth);
   height: var(--tileHeight);
   padding: 0;
@@ -45,7 +48,7 @@ i {
   font-size: larger;
   border-radius: 0.5rem;
   position: absolute;
-  transition: background-color 1s ease-in, rotate 1.5s, filter 1.5s;
+  transition: background-color 1s ease-in, rotate 1.5s, filter 1.5s, top 2s, left 2s;
   z-index: 20;
 
 }

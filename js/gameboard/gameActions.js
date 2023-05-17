@@ -121,37 +121,41 @@ function moveTileTo(tile, x = null, y = null, duration = 2000) {
   // console.log('moveTileTo', tile, x, y)
   if (x === null && y === null) return;
   const el = document.getElementById('tile' + tile.id);
-  const animation = el.animate([
-    {
-      top: calcTileStyleTop(tile.x, tile.y),
-      left: calcTileStyleLeft(tile.x, tile.y)
-    },
-    {
-      top: calcTileStyleTop(x, y),
-      left: calcTileStyleLeft(x, y)
-    }
-  ], {duration: duration, iterations: 1});
 
-  tile.x = x;
-  tile.y = y;
-  el.title = JSON.stringify(tile);
+  el.style.setProperty('--tile-x', x);
+  el.style.setProperty('--tile-y', y);
 
-  //update progress bar for fun
-  const progressEl = document.getElementsByTagName("progress")[0];
-  progressEl.value = 0;
-  const intervalId = setInterval(() => {
-    progressEl.value = animation.effect.getComputedTiming().progress;
-  }, 50);
-
-  tempDisableAllInserts(duration);
-
-  animation.onfinish = () => {
-    clearInterval(intervalId);
-    progressEl.value = 1;
-    //persist the movement animation
-    el.style.top = calcTileStyleTop(tile.x, tile.y);
-    el.style.left = calcTileStyleLeft(tile.x, tile.y);
-  };
+  // const animation = el.animate([
+  //   {
+  //     top: calcTileStyleTop(tile.x, tile.y),
+  //     left: calcTileStyleLeft(tile.x, tile.y)
+  //   },
+  //   {
+  //     top: calcTileStyleTop(x, y),
+  //     left: calcTileStyleLeft(x, y)
+  //   }
+  // ], {duration: duration, iterations: 1});
+  //
+  // tile.x = x;
+  // tile.y = y;
+  // el.title = JSON.stringify(tile);
+  //
+  // //update progress bar for fun
+  // const progressEl = document.getElementsByTagName("progress")[0];
+  // progressEl.value = 0;
+  // const intervalId = setInterval(() => {
+  //   progressEl.value = animation.effect.getComputedTiming().progress;
+  // }, 50);
+  //
+  // tempDisableAllInserts(duration);
+  //
+  // animation.onfinish = () => {
+  //   clearInterval(intervalId);
+  //   progressEl.value = 1;
+  //   //persist the movement animation
+  //   el.style.top = calcTileStyleTop(tile.x, tile.y);
+  //   el.style.left = calcTileStyleLeft(tile.x, tile.y);
+  // };
 }
 
 function rotateTileTo(tile, deg) {

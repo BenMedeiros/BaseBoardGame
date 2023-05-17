@@ -14,7 +14,7 @@ const ACTIVE_PLAYER_STEPS = {
   }
 };
 
-Object.defineProperty(ACTIVE_PLAYER_STEPS,'getStringOf',{enumerable:false});
+Object.defineProperty(ACTIVE_PLAYER_STEPS, 'getStringOf', {enumerable: false});
 Object.seal(ACTIVE_PLAYER_STEPS);
 
 function addPlayer(name, imageFilter) {
@@ -31,10 +31,14 @@ function addPlayer(name, imageFilter) {
     //null - not shared, else what position they occupy on the tile
     sharedTilePosition: 0,
     sharedTiles: 0,
-    playerStep : 0
+    playerStep: 0
   };
   Object.defineProperties(player, {
-    elId_playerName: {
+    elId_playerBox: {
+      get() {
+        return 'player-box' + this.id
+      }
+    }, elId_playerName: {
       get() {
         return 'player-name' + this.id
       }
@@ -72,9 +76,11 @@ function addPlayer(name, imageFilter) {
 }
 
 function setPlayerActive(player) {
+  if (!gameState.activePlayer) gameState.activePlayer = players[utils.randomInt(0, players.length - 1)];
+
   const oldActivePlayer = gameState.activePlayer;
   gameState.activePlayer = player;
-  if(oldActivePlayer && player.id !== oldActivePlayer.id){
+  if (player.id !== oldActivePlayer.id) {
     oldActivePlayer.playerStep = ACTIVE_PLAYER_STEPS.INACTIVE;
     updatePlayerStatusElements(oldActivePlayer);
   }
@@ -117,7 +123,7 @@ function movePlayer(player, x, y) {
     for (let i = 0; i < sharedTilePlayersArray.length; i++) {
       const pl = sharedTilePlayersArray[i];
       //one player moves at a time, so the count would change for anyone affected
-      if(pl.sharedTiles !== sharedTilePlayersArray.length) {
+      if (pl.sharedTiles !== sharedTilePlayersArray.length) {
         pl.sharedTilePosition = i;
         pl.sharedTiles = sharedTilePlayersArray.length;
         updatePlayerCharacterElementOffset(pl)
@@ -136,11 +142,9 @@ function movePlayerBy(player, x, y) {
   }
 }
 
-addPlayer('Ben', null);
+addPlayer('Ben', 'hue-rotate(0deg)');
 addPlayer('Sadaf', 'hue-rotate(110deg) saturate(1.3)');
 addPlayer('player 3', 'hue-rotate(210deg)');
 addPlayer('Frank', 'hue-rotate(40deg)');
-
-setPlayerActive(players[utils.randomInt(0, players.length - 1)]);
 
 document.addEventListener('insert-clicked-success', nextPlayerStep);
