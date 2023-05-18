@@ -1,8 +1,6 @@
 'use strict';
 
 
-const inserts = []
-
 const gameConfig = {
   playerName: null,
   animateStart: false,
@@ -26,8 +24,8 @@ Object.defineProperties(gameConfig, {
     },
     set(width) {
       this._tileWidth = width;
-      document.documentElement.style.setProperty('--tileWidth', width + 'rem');
-      document.documentElement.style.setProperty('--tileHeight', width + 'rem');
+      gameboardElement.style.setProperty('--tileWidth', width + 'rem');
+      gameboardElement.style.setProperty('--tileHeight', width + 'rem');
     }
   },
   tileHeight: {
@@ -47,7 +45,7 @@ Object.defineProperties(gameConfig, {
     },
     set(num) {
       this._numCols = num;
-      document.documentElement.style.setProperty('--num-cols', num);
+      gameboardElement.style.setProperty('--num-cols', num);
     }
   },
   _numRows : {
@@ -62,7 +60,7 @@ Object.defineProperties(gameConfig, {
     },
     set(num) {
       this._numRows = num;
-      document.documentElement.style.setProperty('--num-rows', num);
+      gameboardElement.style.setProperty('--num-rows', num);
     }
   },
   numTiles: {

@@ -2,24 +2,11 @@
 
 const gameboardElement = document.getElementById("gameboard");
 
-function clearGameboardElement() {
-  while (gameboardElement.hasChildNodes()) {
-    gameboardElement.removeChild(gameboardElement.firstChild)
-  }
-}
-
 function updateTileElement(el, tile) {
   if (el === null) el = document.getElementById('tile' + tile.id);
-  // el.style.height = `${gameConfig.tileHeight}rem`;
-  // el.style.width = `${gameConfig.tileWidth}rem`;
-  // el.style.top = `${tile.y * gameConfig.tileHeight}rem`;
-  // el.style.left = `${tile.x * gameConfig.tileWidth}rem`;
   el.style.setProperty('--tile-x', tile.x);
   el.style.setProperty('--tile-y', tile.y);
-
-
-
-  el.style.rotate = tile.rotation + 'deg';
+  el.style.setProperty('--tile-rotation', tile.rotation);
 
   if (tile.isActiveTile) {
     el.classList.add('active-tile');
@@ -27,7 +14,7 @@ function updateTileElement(el, tile) {
     el.classList.remove('active-tile');
   }
 
-  el.title = JSON.stringify(tile);
+  // el.title = JSON.stringify(tile);
   el.textContent = tile.id
 }
 
@@ -40,7 +27,7 @@ function createTileElements(tilesList) {
     el.classList.add('tile-road-tiles');
     el.classList.add(tileTypes[tile.type]);
     el.id = 'tile' + tile.id;
-    updateTileElement(el, tile);
+    // updateTileElement(el, tile);
     fragment.appendChild(el);
     el.onclick = (e) => {
       document.dispatchEvent(new CustomEvent('tile-clicked', {detail: {tile}}));
