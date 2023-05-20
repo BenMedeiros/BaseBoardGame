@@ -24,8 +24,8 @@ Object.defineProperties(gameConfig, {
     },
     set(width) {
       this._tileWidth = width;
-      gameboardElement.style.setProperty('--tileWidth', width + 'rem');
-      gameboardElement.style.setProperty('--tileHeight', width + 'rem');
+      document.documentElement.style.setProperty('--tileWidth', width + 'rem');
+      document.documentElement.style.setProperty('--tileHeight', width + 'rem');
     }
   },
   tileHeight: {

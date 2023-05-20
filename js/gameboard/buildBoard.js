@@ -64,6 +64,8 @@ function rebuildBoard() {
   tiles[0].isActiveTile = true;
 
   setTimeout(setNextPlayerActive, 1000);
+
+
 }
 
 

@@ -86,7 +86,16 @@ function createTile(x, y, rotation, type) {
         if (deg === this._rotation) return;
         this._rotation = deg;
         this.getUiElement()?.style.setProperty('--tile-rotation', deg);
-        this.updateUiElementTitle();
+
+        if (deg % 180 === 0) {
+          this.getUiElement()?.style.setProperty('--tile-rotation-x', deg % 360 === 0 ? 1 : -1);
+          this.getUiElement()?.style.setProperty('--tile-rotation-y', 0);
+        } else if (Math.abs(deg % 180) === 90) {
+          this.getUiElement()?.style.setProperty('--tile-rotation-x', 0);
+          this.getUiElement()?.style.setProperty('--tile-rotation-y', (deg + 90) % 360 === 0 ? 1 : -1);
+        } else {
+          throw new Error('Cant handle none quarter rotations yet.');
+        }
       }
     },
     _isActiveTile: {
@@ -128,7 +137,7 @@ function createTile(x, y, rotation, type) {
   return tile;
 }
 
-function deleteAllTiles(){
+function deleteAllTiles() {
   for (const tile of tiles) {
     tile.getUiElement().remove();
   }

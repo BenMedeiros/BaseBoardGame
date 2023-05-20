@@ -1,0 +1,68 @@
+:root {
+  --color-card-background: #77746c;
+}
+
+
+.player-drawer, .playing-card-face > img {
+  /*center align*/
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+}
+
+.player-drawer {
+  background-color: var(--color-menu-backdrop);
+  min-height: var(--tileHeight);
+  /*include 2.1rem for padding/margin of cards*/
+  max-height: calc(2 * var(--tileHeight) + 2.1rem);
+  min-width: calc(3 * var(--tileWidth));
+  max-width: 60%;
+  width: fit-content;
+  bottom: 2rem;
+  padding: .7rem;
+  border: solid var(--color-menu-border);
+  border-radius: 1rem;
+  overflow: auto;
+  text-align: center;
+
+  filter: drop-shadow(2px 4px 6px black);
+}
+
+.playing-card {
+  display: inline-block;
+  height: var(--tileHeight);
+  width: var(--tileWidth);
+  margin: .2rem;
+  transition: transform 2s;
+  transform-style: preserve-3d;
+}
+
+.playing-card-face {
+  height: var(--tileHeight);
+  width: var(--tileWidth);
+  backface-visibility: hidden;
+  position: absolute;
+  border-radius: 100%;
+  filter: drop-shadow(2px 4px 6px black);
+}
+
+.playing-card-face > img {
+  width: 80%;
+  top: 0;
+  bottom: 0;
+}
+
+.playing-card-front {
+  background-color: var(--color-card-background);
+  color: white;
+}
+
+.playing-card-back {
+  background-color: white;
+  transform: rotateY(180deg);
+}
+
+.playing-card:hover {
+  transform: rotateY(180deg);
+}

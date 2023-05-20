@@ -25,7 +25,7 @@ function createInsert(x, y, rotation, oppositeId) {
     // y if a row, else undefined
     row: {
       get() {
-        if(Math.abs(rotation) % 180 === 0) return this.y;
+        if(rotation % 180 === 0) return this.y;
       }
     },
     //  x if a col, else undefined

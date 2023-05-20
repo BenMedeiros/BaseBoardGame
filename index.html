@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="css/gameboard/mainboard.css">
   <link rel="stylesheet" href="css/gameboard/settingsForm.css">
   <link rel="stylesheet" href="css/gameboard/playerBoard.css">
+  <link rel="stylesheet" href="css/gameboard/playerDrawer.css">
 
 
 </head>
@@ -75,6 +76,7 @@
     <input type="submit" value="Update Board" onclick="updateBoard(this)">
   </form>
 
+  <img src="/img/pokemon/gifs/pikachu_dancing.gif" style="position:absolute;left:0;bottom:0;height:5rem">
   <progress value="0" max="1" style="position:absolute;right:1rem;bottom:1rem"></progress>
 
   <div id="gameboard" class="gameboard"></div>
@@ -85,6 +87,17 @@
     </h4>
     <hr style="margin: .5rem 0"/>
     <!--    js inserts players here-->
+  </div>
+
+  <div id="player-drawer" class="player-drawer">
+
+    <div class="playing-card">
+      <div class="playing-card-face playing-card-front">
+        <img src="img/pokemon/catchable/001.png"></img>
+      </div>
+      <div class="playing-card-face playing-card-back">back</div>
+    </div>
+
   </div>
 
 
@@ -99,6 +112,7 @@
   <script src="js/gameboard/gameActions.js"></script>
   <script src="js/controllers/playerController.js"></script>
   <script src="js/controllers/tileController.js"></script>
+  <script src="js/controllers/playingCardController.js"></script>
   <script src="js/gameboard/buildBoard.js"></script>
   <script src="js/gameboard/gameControls.js"></script>
   <script src="js/gameboard/rules.js"></script>
