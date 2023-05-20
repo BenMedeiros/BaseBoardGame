@@ -89,15 +89,10 @@
     <!--    js inserts players here-->
   </div>
 
-  <div id="player-drawer" class="player-drawer">
-
-    <div class="playing-card">
-      <div class="playing-card-face playing-card-front">
-        <img src="img/pokemon/catchable/001.png"></img>
-      </div>
-      <div class="playing-card-face playing-card-back">back</div>
-    </div>
-
+  <div id="player-drawer-outer" class="player-drawer-outer">
+    <button id="player-drawer-control" class="player-drawer-control" onclick="toggleDrawer()">{Drawer}</button>
+    <!--   js injects cards here   -->
+    <div id="player-drawer" class="player-drawer">
   </div>
 
 
@@ -108,6 +103,7 @@
   <script src="js/controllers/insertsController.js"></script>
   <script src="js/gameboard/htmlElementCreation.js"></script>
   <script src="js/components/playerElements.js"></script>
+  <script src="js/controllers/playerDrawerController.js"></script>
   <script src="js/controllers/settingsController.js"></script>
   <script src="js/gameboard/gameActions.js"></script>
   <script src="js/controllers/playerController.js"></script>

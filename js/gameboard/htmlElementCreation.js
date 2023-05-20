@@ -2,22 +2,6 @@
 
 const gameboardElement = document.getElementById("gameboard");
 
-function updateTileElement(el, tile) {
-  if (el === null) el = document.getElementById('tile' + tile.id);
-  el.style.setProperty('--tile-x', tile.x);
-  el.style.setProperty('--tile-y', tile.y);
-  el.style.setProperty('--tile-rotation', tile.rotation);
-
-  if (tile.isActiveTile) {
-    el.classList.add('active-tile');
-  } else {
-    el.classList.remove('active-tile');
-  }
-
-  // el.title = JSON.stringify(tile);
-  el.textContent = tile.id
-}
-
 function createTileElements(tilesList) {
   const fragment = document.createDocumentFragment();
 
@@ -27,7 +11,6 @@ function createTileElements(tilesList) {
     el.classList.add('tile-road-tiles');
     el.classList.add(tileTypes[tile.type]);
     el.id = 'tile' + tile.id;
-    // updateTileElement(el, tile);
     fragment.appendChild(el);
     el.onclick = (e) => {
       document.dispatchEvent(new CustomEvent('tile-clicked', {detail: {tile}}));

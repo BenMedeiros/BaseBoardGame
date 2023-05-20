@@ -1,11 +1,12 @@
 :root {
   --color-menu-backdrop : #2f3032;
   --color-menu-border : lightgrey;
+  --color-menu-subtext: #888888;
 }
 
 form {
   background-color: var(--color-menu-backdrop);
-  color: white;
+  color: var(--color-menu-border);
   font-family: Arial;
   padding: 0 1rem 1rem 1rem;
   border: 1px solid var(--color-menu-border);
@@ -55,7 +56,7 @@ form input:hover, select:hover {
 form input[type=submit] {
   width: 100%;
   background-color: #4CAF50;
-  color: white;
+  color: var(--color-white);
   padding: 1.1rem 1.3rem;
   border: 1px solid #ccc;
   border-radius: 4px;

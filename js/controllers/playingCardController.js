@@ -5,25 +5,23 @@ const playingCards = [];
 function createPlayingCard(name, icon) {
 
   //temp for pokemon, need to remove or generalize
-  const pokeNumber = icon.substr(-7,3);
+  const pokeNumber = icon.substr(-7, 3);
 
   const playingCard = {
-    id : playingCards.length,
+    id: playingCards.length,
     name,
     pokeNumber,
     icon,
     isFlipped: false
   }
 
+  playingCards.push(playingCard);
   return playingCard;
 }
 
-const playerDrawerElement = document.getElementById("player-drawer");
-
-
 function createPlayingCardElement(playingCard) {
   const cardEl = document.createElement("div");
-  cardEl.id = playingCard.id;
+  cardEl.id = 'playing-card' + playingCard.id;
   cardEl.classList.add('playing-card');
 
   const cardFrontEl = document.createElement("div");
@@ -44,6 +42,19 @@ function createPlayingCardElement(playingCard) {
 }
 
 
+
+createPlayingCardElement(createPlayingCard('Bulbasaur', 'img/pokemon/catchable/001.png'));
+createPlayingCardElement(createPlayingCard('Charmander', 'img/pokemon/catchable/004.png'));
+createPlayingCardElement(createPlayingCard('Metapod', 'img/pokemon/catchable/011.png'));
+createPlayingCardElement(createPlayingCard('Pikachu', 'img/pokemon/catchable/025.png'));
+createPlayingCardElement(createPlayingCard('Raichu', 'img/pokemon/catchable/026.png'));
+createPlayingCardElement(createPlayingCard('Diglett', 'img/pokemon/catchable/050.png'));
+createPlayingCardElement(createPlayingCard('Bulbasaur', 'img/pokemon/catchable/001.png'));
+createPlayingCardElement(createPlayingCard('Charmander', 'img/pokemon/catchable/004.png'));
+createPlayingCardElement(createPlayingCard('Metapod', 'img/pokemon/catchable/011.png'));
+createPlayingCardElement(createPlayingCard('Pikachu', 'img/pokemon/catchable/025.png'));
+createPlayingCardElement(createPlayingCard('Raichu', 'img/pokemon/catchable/026.png'));
+createPlayingCardElement(createPlayingCard('Diglett', 'img/pokemon/catchable/050.png'));
 createPlayingCardElement(createPlayingCard('Bulbasaur', 'img/pokemon/catchable/001.png'));
 createPlayingCardElement(createPlayingCard('Charmander', 'img/pokemon/catchable/004.png'));
 createPlayingCardElement(createPlayingCard('Metapod', 'img/pokemon/catchable/011.png'));

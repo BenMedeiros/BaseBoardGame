@@ -7,15 +7,6 @@ async function updateBoard(event) {
   rebuildBoard();
 }
 
-function makeTileActive(tile) {
-  tile.isActiveTile = true;
-  // tile.isActiveTile = true;
-  // gameState.activeTile.isActiveTile = false;
-  // updateTileElement(null, gameState.activeTile);
-  // updateTileElement(null, tile);
-  // gameState.activeTile = tile;
-}
-
 function tempDisableAllInserts(duration) {
   if (tempStates.insertsTempDisabledTimeoutId) {
     //clear existing timeout and recreate with new duration
@@ -106,7 +97,7 @@ function moveRow(row, direction) {
     if (tile.y === row) {
       tile.x += direction;
       if (tile.x === -1 || tile.x === gameConfig.numCols) {
-        makeTileActive(tile);
+        tile.isActiveTile = true;
       }
     }
   }
@@ -117,7 +108,7 @@ function moveColumn(col, direction) {
     if (tile.x === col) {
       tile.y += direction;
       if (tile.y === -1 || tile.y === gameConfig.numRows) {
-        makeTileActive(tile);
+        tile.isActiveTile = true;
       }
     }
   }

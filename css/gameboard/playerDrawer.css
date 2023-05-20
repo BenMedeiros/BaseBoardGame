@@ -1,9 +1,11 @@
 :root {
   --color-card-background: #77746c;
+  --color-white : white;
+  --color-scrollbar: #5b6367;
+  --color-scrollbar-hover: #555;
 }
 
-
-.player-drawer, .playing-card-face > img {
+.player-drawer-outer, .player-drawer, .playing-card-face > img {
   /*center align*/
   position: absolute;
   margin: auto;
@@ -11,22 +13,46 @@
   right: 0;
 }
 
-.player-drawer {
-  background-color: var(--color-menu-backdrop);
-  min-height: var(--tileHeight);
-  /*include 2.1rem for padding/margin of cards*/
-  max-height: calc(2 * var(--tileHeight) + 2.1rem);
-  min-width: calc(3 * var(--tileWidth));
-  max-width: 60%;
-  width: fit-content;
+.player-drawer-outer {
   bottom: 2rem;
-  padding: .7rem;
+  width: 60%;
+  background-color: var(--color-menu-backdrop);
   border: solid var(--color-menu-border);
   border-radius: 1rem;
+  filter: drop-shadow(2px 4px 6px black);
+  overflow: hidden;
+}
+
+.player-drawer {
+  position: relative;
+  /*include 1.8rem for padding/margin of cards*/
+  min-height: calc(var(--tileHeight) + 1.5rem);
+  max-height: calc(var(--tileHeight) * 3.5);
+  min-width: calc(3 * var(--tileWidth));
+  width: auto;
+  padding: 1.6rem .7rem .7rem;
   overflow: auto;
   text-align: center;
+}
 
-  filter: drop-shadow(2px 4px 6px black);
+.player-drawer-control {
+  position: absolute;
+  right: 1rem;
+  top: .1rem;
+  border: none;
+  border-radius: .3rem;
+  background-color: var(--color-menu-backdrop);
+  color: var(--color-menu-subtext);
+  z-index: 1;
+}
+
+.player-drawer-control:hover {
+  color: var(--color-white);
+}
+
+.player-drawer.collapsed {
+  /* 1 line drawer, not currently used */
+  white-space: nowrap;
 }
 
 .playing-card {
@@ -55,14 +81,35 @@
 
 .playing-card-front {
   background-color: var(--color-card-background);
-  color: white;
+  color: var(--color-white);
 }
 
 .playing-card-back {
-  background-color: white;
+  background-color: var(--color-backdrop);
   transform: rotateY(180deg);
 }
 
 .playing-card:hover {
   transform: rotateY(180deg);
+}
+
+.player-drawer::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+/* Track */
+.player-drawer::-webkit-scrollbar-track {
+  background: var(--color-menu-backdrop);
+}
+
+/* Handle */
+.player-drawer::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar);
+  border-radius: 1rem;
+}
+
+/* Handle on hover */
+.player-drawer::-webkit-scrollbar-thumb:hover {
+  background: var(--color-scrollbar-hover);
 }

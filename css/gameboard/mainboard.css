@@ -115,7 +115,7 @@ i {
 .tile.active-tile {
   border-color: darkblue;
   background-color: blue;
-  color: white;
+  color: var(--color-white);
   border-width: unset;
 }
 
